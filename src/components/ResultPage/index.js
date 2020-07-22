@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "@reach/router";
-import { Search, ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
+import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
 import "./index.css";
 
 const Book = ({ data }) => {
@@ -9,7 +8,7 @@ const Book = ({ data }) => {
     <div className="book">
       <div className="book-cover">
         <a href={data.previewLink} target="_blank" rel="external">
-          <img src={data.imageLinks.smallThumbnail} />
+          <img src={data.imageLinks.smallThumbnail} alt={data.title} />
         </a>
       </div>
       <div className="book-info">
@@ -17,7 +16,9 @@ const Book = ({ data }) => {
         <div>
           <p className="description">{data.description}</p>
           <div className="meta">
-            <span> - {data.publishedDate}</span>
+            <span>
+              {data.authors[0]}- {data.publishedDate}
+            </span>
           </div>
         </div>
       </div>
@@ -56,7 +57,7 @@ const ResultPage = ({ location }) => {
       <div className="controls">
         <div className="filters">
           <div>
-            <span>Sort by date</span>
+            <span>Sort by relevance</span>
             <ChevronDown size={16} />
           </div>
           <div>
@@ -75,14 +76,12 @@ const ResultPage = ({ location }) => {
             fetchBooks(input);
           }}
         >
-          {/*<Search className="search-icon" size={24} />*/}
           <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
           <input type="submit" value="Search" />
         </form>
       </div>
       <div className="results">
         {results && results.map(result => <Book key={result.id} data={result.volumeInfo} />)}
-        {console.log(results)}
       </div>
     </div>
   );

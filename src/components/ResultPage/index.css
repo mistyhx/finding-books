@@ -63,12 +63,48 @@
   margin: 4rem 0;
   max-width: 960px;
 }
-
-.book-cover img {
-  box-shadow: 15px 15px 8px 0 rgba(0, 0, 0, 0.2);
+.book-cover {
+  transition: all 500ms ease-in-out;
+  transform-origin: 0 0;
+  transform-style: preserve-3d;
+  transform: rotateY(0);
+  transition: all 500ms ease-in-out;
+}
+.book-cover:after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0px;
+  right: -6px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAG0lEQVQIW2P8/////w8fPjAICAgwwGhGGggCAOYAMfLhHG5wAAAAAElFTkSuQmCC)
+    repeat;
+  width: 4px;
+  height: calc(100% - 3px);
+  transform: rotateY(35deg);
+  transform-origin: right;
+  transition: all 500ms ease-in-out;
 }
 
-.title {
+.book-cover img {
+  box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 128px;
+  transition: all 500ms ease-in-out;
+}
+
+.book-cover:hover {
+  transform: rotateY(-20deg);
+}
+
+.book-cover:hover:after {
+  right: -15px;
+  width: 15px;
+}
+
+.book-cover:hover img {
+  box-shadow: 20px 18px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.book-cover .title {
   font-family: "Didot", cursive;
   border-left: 6px solid #ff4f2d;
   font-weight: bold;
