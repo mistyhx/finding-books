@@ -16,17 +16,18 @@ const ResultPage = ({ location }) => {
 
   return (
     <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          fetchBooks(input);
-        }}
-      >
-        <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
-        <input type="submit" />
-      </form>
-      <div>{results && results.map(result => <li key={result.id}>{result.volumeInfo.title}</li>)}</div>
-      Results: 1 - 5
+      <div>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            fetchBooks(input);
+          }}
+        >
+          <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
+          <input type="submit" />
+        </form>
+      </div>
+      <div>{results && results.map(result => <li key={result.id}>{result.volumeInfo.title}</li>)}</div>;
     </div>
   );
 };
