@@ -104,7 +104,7 @@
   box-shadow: 20px 18px 10px 0 rgba(0, 0, 0, 0.15);
 }
 
-.book-cover .title {
+.title {
   font-family: "Didot", cursive;
   border-left: 6px solid #ff4f2d;
   font-weight: bold;
