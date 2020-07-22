@@ -5,6 +5,7 @@
   box-shadow: 0 6px 20px 0px rgba(222, 143, 143, 0.25);
   border-radius: 0;
   transition: box-shadow 200ms ease-in-out;
+  position: relative;
 }
 .search-form:focus-within {
   box-shadow: 0 8px 25px 5px rgba(222, 143, 143, 0.25);
@@ -30,6 +31,7 @@ input[type="submit"] {
   text-transform: uppercase;
   padding-left: 2rem;
   padding-right: 2rem;
+  cursor: pointer;
 }
 
 .highlight {

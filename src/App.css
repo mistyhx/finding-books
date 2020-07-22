@@ -20,6 +20,10 @@ body {
   position: absolute;
 }
 
+.results-page {
+  padding-top: 4rem;
+}
+
 .search-page h1 {
   margin-bottom: 3.5rem;
 }

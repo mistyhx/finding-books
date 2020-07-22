@@ -1,0 +1,67 @@
+.controls {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rem;
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+}
+
+.filters {
+  display: flex;
+  font-family: "Didot", cursive;
+  text-transform: uppercase;
+}
+
+.filters div {
+  padding: 0 1rem;
+}
+
+.results-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.results-page .search-form {
+  height: 40px;
+  min-width: 360px;
+}
+
+.book {
+  display: flex;
+  margin: 4rem 0;
+  max-width: 960px;
+}
+
+.title {
+  font-family: "Didot", cursive;
+  border-left: 6px solid #ff4f2d;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+}
+
+.book-info {
+  padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.description {
+  opacity: 0.7;
+  line-height: 1.5rem;
+  height: 46px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  margin-top: 2rem;
+  opacity: 0.4;
+}
