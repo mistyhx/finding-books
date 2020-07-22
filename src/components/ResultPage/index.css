@@ -1,9 +1,29 @@
+.pagination {
+  text-align: center;
+  position: absolute;
+  right: 0;
+  font-family: "Didot", cursive;
+  font-size: 2rem;
+  top: 35%;
+  right: 1.2rem;
+}
+
+.pagination div {
+  color: #bababa;
+  padding: 0.5rem 2rem;
+}
+
+.pagination .active-page {
+  color: black;
+}
+
 .controls {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8rem;
+  margin-top: 2rem;
+  margin-bottom: 6rem;
 }
 
 .search-icon {
@@ -20,9 +40,14 @@
 }
 
 .filters div {
-  padding: 0 1rem;
+  padding: 0 2rem 0 0;
+  display: flex;
+  align-items: center;
 }
 
+.filters span {
+  margin-right: 0.5rem;
+}
 .results-page {
   max-width: 1200px;
   margin: 0 auto;

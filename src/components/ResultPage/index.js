@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Search, ChevronDown } from "react-feather";
+import { Link } from "@reach/router";
+import { Search, ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
 import "./index.css";
 
 const Book = ({ data }) => {
   return (
     <div className="book">
       <div className="book-cover">
-        <a href={data.previewLink} target="_blank">
+        <a href={data.previewLink} target="_blank" rel="external">
           <img src={data.imageLinks.smallThumbnail} />
         </a>
       </div>
@@ -39,17 +40,32 @@ const ResultPage = ({ location }) => {
 
   return (
     <div className="results-page">
+      <div className="pagination">
+        <div>
+          <ChevronsUp />
+        </div>
+        <div className="active-page">1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>
+          <ChevronsDown />
+        </div>
+      </div>
       <div className="controls">
         <div className="filters">
           <div>
-            Sort by date
+            <span>Sort by date</span>
             <ChevronDown size={16} />
           </div>
           <div>
-            Publish date <ChevronDown size={16} />
+            <span>Publish date </span>
+            <ChevronDown size={16} />
           </div>
           <div>
-            Categories <ChevronDown size={16} />
+            <span> Categories </span>
+            <ChevronDown size={16} />
           </div>
         </div>
         <form
