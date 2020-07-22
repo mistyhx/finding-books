@@ -4,7 +4,7 @@ import { navigate } from "@reach/router";
 const SearchPage = () => {
   const [term, setTerm] = useState("");
   return (
-    <div>
+    <div className="search-page">
       <h1>What book would you like to find? </h1>
       <form
         onSubmit={e => {
