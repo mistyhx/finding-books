@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <div className="logo">
         <Link to="/">
-          <Book size={24} />
-          <span>Bookstore</span>
+          <Book size={18} />
+          <span>EleBooks</span>
         </Link>
       </div>
       <Router className="main">

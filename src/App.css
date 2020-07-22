@@ -8,16 +8,31 @@ body {
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
 .App {
   margin: 0;
-  padding: 2rem;
   height: 100vh;
   position: relative;
 }
 
 .logo {
-  display: inline-block;
+  z-index: 99;
   position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+
+.logo span {
+  font-family: "Didot", cursive;
+  font-size: 18px;
+  padding-left: 10px;
+  vertical-align: top;
 }
 
 .results-page {
@@ -30,8 +45,8 @@ body {
 
 .search-elements {
   float: right;
-  margin: auto 6rem;
-  margin-top: 15%;
+  margin: 0 6rem;
+  margin-top: 16%;
 }
 
 h1,

@@ -1,3 +1,6 @@
+.search-page {
+  height: 100vh;
+}
 .search-form {
   height: 50px;
   display: flex;
