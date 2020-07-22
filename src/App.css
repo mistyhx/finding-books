@@ -12,21 +12,21 @@ body {
   margin: 0;
   padding: 2rem;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 
 .logo {
   display: inline-block;
+  position: absolute;
 }
 
-.main {
-  width: 100%;
-  height: 100%;
+.search-page h1 {
+  margin-bottom: 3.5rem;
 }
-.search-page {
+
+.search-elements {
   float: right;
-  margin: 0 6rem;
+  margin: auto 6rem;
   margin-top: 15%;
 }
 

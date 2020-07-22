@@ -1,0 +1,37 @@
+.search-form {
+  height: 50px;
+  display: flex;
+  justify-content: stretch;
+  box-shadow: 0 6px 20px 0px rgba(222, 143, 143, 0.25);
+  border-radius: 0;
+  transition: box-shadow 200ms ease-in-out;
+}
+.search-form:focus-within {
+  box-shadow: 0 8px 25px 5px rgba(222, 143, 143, 0.25);
+}
+
+input[type="text"] {
+  border: none;
+  width: 100%;
+  padding: 0 1rem;
+  border-radius: 0;
+}
+
+input:focus {
+  outline-color: transparent;
+  outline: none;
+}
+
+input[type="submit"] {
+  font-family: "Didot", cursive;
+  font-weight: bold;
+  background: #ff4f2d;
+  border: none;
+  text-transform: uppercase;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.highlight {
+  border-bottom: 6px solid #ff4f2d;
+}
