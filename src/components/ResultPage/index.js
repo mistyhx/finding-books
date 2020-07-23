@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
 import "./index.css";
 
@@ -24,13 +25,21 @@ const Book = ({ data }) => {
           <p className="description">{data.description}</p>
           <div className="meta">
             <span>
-              {data.authores && data.authors[0]}-{data.publishedDate}
+              {data.authors && data.authors[0]}-{data.publishedDate}
             </span>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+Book.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
+Book.defaultProps = {
+  data: {},
 };
 
 const ResultPage = ({ location }) => {
