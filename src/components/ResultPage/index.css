@@ -2,6 +2,7 @@
   padding: 4rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
 }
 
 .results {
@@ -31,11 +32,17 @@
 .controls {
   display: flex;
   width: 100%;
-
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 6rem;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  /*specify the top distance for sticky effect*/
+  top: 0;
+  padding: 1.5rem 0;
+  position: -webkit-sticky;
+  position: sticky;
+  background: #fff;
+  z-index: 99;
 }
 
 .search-icon {
