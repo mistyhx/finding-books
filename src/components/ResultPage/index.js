@@ -25,7 +25,14 @@ const Book = ({ data }) => {
           <p className="description">{data.description}</p>
           <div className="meta">
             <span>
-              {data.authors && data.authors[0]}-{data.publishedDate}
+              {data.authors
+                ? data.authors.map((author, index) => (
+                    <span key={index} className="author-name">
+                      {author}
+                    </span>
+                  ))
+                : "unknown"}
+              - <span className="publish-date">{data.publishedDate}</span>
             </span>
           </div>
         </div>

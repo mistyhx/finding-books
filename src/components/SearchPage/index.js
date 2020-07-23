@@ -23,7 +23,7 @@ const SearchPage = () => {
           className="search-form"
           onSubmit={e => {
             e.preventDefault();
-            navigate("/results", { state: { searchTerm: term } });
+            navigate("/finding-books/results", { state: { searchTerm: term } });
           }}
         >
           <input

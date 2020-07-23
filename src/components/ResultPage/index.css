@@ -96,6 +96,14 @@
   transition: all 500ms ease-in-out;
 }
 
+.author-name {
+  padding-right: 0.5rem;
+}
+
+.author-name:not(:nth-last-child(2)):after {
+  content: " |";
+}
+
 .book-cover img {
   box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
   width: 128px;
