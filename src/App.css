@@ -1,3 +1,50 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
 .App {
-  padding: 2rem;
+  margin: 0;
+  height: 100vh;
+  position: relative;
+}
+
+.logo {
+  z-index: 99;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+
+.logo span {
+  font-family: "Didot", cursive;
+  font-size: 18px;
+  padding-left: 10px;
+  vertical-align: top;
+}
+
+
+
+
+
+h1,
+h2,
+h3 {
+  font-family: "Didot", cursive;
+}
+
+h1 {
+  font-size: 3rem;
 }
