@@ -8,7 +8,14 @@ const Book = ({ data }) => {
     <div className="book">
       <div className="book-cover">
         <a href={data.previewLink} target="_blank" rel="external">
-          <img src={data.imageLinks.smallThumbnail} alt={data.title} />
+          <img
+            src={
+              data.imageLinks.smallThumbnail
+                ? data.imageLinks.smallThumbnail
+                : "https://i.dlpng.com/static/png/6565478_preview.png"
+            }
+            alt={data.title}
+          />
         </a>
       </div>
       <div className="book-info">
@@ -17,7 +24,7 @@ const Book = ({ data }) => {
           <p className="description">{data.description}</p>
           <div className="meta">
             <span>
-              {data.authors[0]}- {data.publishedDate}
+              {data.authores && data.authors[0]}-{data.publishedDate}
             </span>
           </div>
         </div>
