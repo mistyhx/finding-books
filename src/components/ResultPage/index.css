@@ -162,3 +162,59 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 700px) {
+  .controls {
+    margin-bottom: 3rem;
+  }
+  .results-page {
+    padding: 2rem;
+  }
+  .filters {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .title {
+    font-size: 1rem;
+  }
+  .book-info {
+    padding: 0 2rem;
+  }
+  .pagination {
+    right: -1rem;
+  }
+  .book-cover img {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .book {
+    margin: 3rem 0;
+  }
+  .filters {
+    font-size: 0.6rem;
+  }
+  .filters div {
+    padding: 0 1rem 0 0;
+  }
+
+  .filters div:last-child {
+    padding: 0;
+  }
+
+  .filters span {
+    margin-right: 0.2rem;
+    transform: translateY(2px);
+  }
+
+  .book-cover {
+    height: 120px;
+  }
+  .book-cover img {
+    width: 80px;
+    height: 120px;
+  }
+}
