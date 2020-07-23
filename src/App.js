@@ -15,8 +15,8 @@ function App() {
         </Link>
       </div>
       <Router className="main">
-        <SearchPage path="/" />
-        <ResultPage path="/results" />
+        <SearchPage path="/finding-books" />
+        <ResultPage path="/finding-books/results" />
       </Router>
     </div>
   );
