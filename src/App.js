@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div className="logo">
-        <Link to="/">
+        <Link to="/finding-books">
           <Book size={18} />
           <span>EleBooks</span>
         </Link>
