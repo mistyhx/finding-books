@@ -32,7 +32,7 @@ const Book = ({ data }) => {
                     </span>
                   ))
                 : "unknown"}
-              - <span className="publish-date">{data.publishedDate}</span>
+              - <span className="publish-date">{data.publishedDate && data.publishedDate}</span>
             </span>
           </div>
         </div>
