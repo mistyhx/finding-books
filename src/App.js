@@ -9,14 +9,14 @@ function App() {
   return (
     <div className="App">
       <div className="logo">
-        <Link to="/finding-books">
+        <Link to="/">
           <Book size={18} />
           <span>EleBooks</span>
         </Link>
       </div>
       <Router className="main">
-        <SearchPage path="/finding-books" />
-        <ResultPage path="/finding-books/results" />
+        <SearchPage path="/" />
+        <ResultPage path="/results" />
       </Router>
     </div>
   );

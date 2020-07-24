@@ -2,11 +2,11 @@
   padding: 4rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
 }
 
 .results {
   opacity: 1;
-  animation: fadeIn 1000ms ease-in-out;
 }
 
 .pagination {
@@ -31,11 +31,17 @@
 .controls {
   display: flex;
   width: 100%;
-
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 6rem;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  /*specify the top distance for sticky effect*/
+  top: 0;
+  padding: 1.5rem 0;
+  position: -webkit-sticky;
+  position: sticky;
+  background: #fff;
+  z-index: 999;
 }
 
 .search-icon {
@@ -84,6 +90,7 @@
 .book-cover:after {
   content: "";
   position: absolute;
+  z-index: 0;
   display: block;
   top: 0px;
   right: -6px;
@@ -93,7 +100,17 @@
   height: calc(100% - 3px);
   transform: rotateY(35deg);
   transform-origin: right;
+  /*webkit transform fix the z-index issue for safari*/
+  -webkit-transform: translate3d(0, 0, 0);
   transition: all 500ms ease-in-out;
+}
+
+.author-name {
+  padding-right: 0.5rem;
+}
+
+.author-name:not(:nth-last-child(2)):after {
+  content: " |";
 }
 
 .book-cover img {
@@ -143,6 +160,10 @@
   opacity: 0.4;
 }
 
+.controls input[type="submit"] {
+  height: 40px;
+}
+
 @media only screen and (max-width: 1024px) {
   .filters {
     font-size: 0.8rem;
@@ -155,6 +176,7 @@
 @media only screen and (max-width: 768px) {
   .controls {
     flex-direction: column;
+    padding: 1rem 0;
   }
 
   .filters {
@@ -200,7 +222,7 @@
     padding: 2rem 1rem;
   }
   .book {
-    margin: 3rem 0;
+    margin: 4rem 0;
   }
   .filters {
     font-size: 0.6rem;
