@@ -158,6 +158,10 @@
   opacity: 0.4;
 }
 
+.controls input[type="submit"] {
+  height: 40px;
+}
+
 @media only screen and (max-width: 1024px) {
   .filters {
     font-size: 0.8rem;
