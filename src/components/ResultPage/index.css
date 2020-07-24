@@ -7,7 +7,6 @@
 
 .results {
   opacity: 1;
-  animation: fadeIn 1000ms ease-in-out;
 }
 
 .pagination {
@@ -42,7 +41,7 @@
   position: -webkit-sticky;
   position: sticky;
   background: #fff;
-  z-index: 99;
+  z-index: 999;
 }
 
 .search-icon {
@@ -91,6 +90,7 @@
 .book-cover:after {
   content: "";
   position: absolute;
+  z-index: 0;
   display: block;
   top: 0px;
   right: -6px;
