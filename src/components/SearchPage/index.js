@@ -23,16 +23,12 @@ const SearchPage = () => {
           className="search-form"
           onSubmit={e => {
             e.preventDefault();
-            navigate("/finding-books/results", { state: { searchTerm: term } });
+            if (term) {
+              navigate("/finding-books/results", { state: { searchTerm: term } });
+            }
           }}
         >
-          <input
-            type="text"
-            placeholder="Search by book title or author name"
-            value={term}
-            onChange={e => setTerm(e.target.value)}
-            required
-          />
+          <input type="text" placeholder="Search" value={term} onChange={e => setTerm(e.target.value)} />
           <input type="submit" value="search" />
         </form>
       </div>
