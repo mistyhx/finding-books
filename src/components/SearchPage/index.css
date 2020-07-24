@@ -47,6 +47,7 @@ input[type="submit"] {
   text-transform: uppercase;
   padding-left: 2rem;
   padding-right: 2rem;
+  margin: 0;
   cursor: pointer;
   /*if webkit appearance not applied the mobile browser will use it native style*/
   -webkit-appearance: none;
