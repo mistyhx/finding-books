@@ -24,7 +24,7 @@ const SearchPage = () => {
           onSubmit={e => {
             e.preventDefault();
             if (term) {
-              navigate("/finding-books/results", { state: { searchTerm: term } });
+              navigate("/results", { state: { searchTerm: term } });
             }
           }}
         >
