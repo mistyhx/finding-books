@@ -28,7 +28,7 @@ const SearchPage = () => {
             }
           }}
         >
-          <input type="text" placeholder="Search" value={term} onChange={e => setTerm(e.target.value)} />
+          <input type="text" placeholder="search" value={term} onChange={e => setTerm(e.target.value)} />
           <input type="submit" value="search" />
         </form>
       </div>

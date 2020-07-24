@@ -9,14 +9,11 @@ const Book = ({ data }) => {
     <div className="book">
       <div className="book-cover">
         <a href={data.previewLink && data.previewLink} target="_blank" rel="noreferrer">
-          <img
-            src={
-              data.imageLinks.smallThumbnail
-                ? data.imageLinks.smallThumbnail
-                : "https://i.dlpng.com/static/png/6565478_preview.png"
-            }
-            alt={data.title}
-          />
+          {data.imageLinks ? (
+            <img src={data.imageLinks.smallThumbnail} alt={data.title && data.title} />
+          ) : (
+            <img src="https://i.dlpng.com/static/png/6565478_preview.png" alt="no-cover" />
+          )}
         </a>
       </div>
       <div className="book-info">
@@ -51,16 +48,17 @@ Book.defaultProps = {
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state.searchTerm);
+  const [searchTerm, setSearchTerm] = useState(location.state.searchTerm || "");
   const [results, setResults] = useState("");
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-  const fetchBooks = async searchTerm => {
+  const fetchBooks = async () => {
     const response = await axios.get(`${API_URL}?q=${searchTerm}`);
     setResults(response.data.items);
   };
 
   useEffect(() => {
-    fetchBooks(location.state.searchTerm);
-  }, []);
+    fetchBooks();
+  }, [searchTerm]);
 
   return (
     <div className="results-page">
@@ -96,7 +94,7 @@ const ResultPage = ({ location }) => {
           className="search-form"
           onSubmit={e => {
             e.preventDefault();
-            fetchBooks(input);
+            setSearchTerm(input);
           }}
         >
           <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
