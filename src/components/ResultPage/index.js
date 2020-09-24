@@ -1,50 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
+import Book from "../../components/Book";
 import "./index.css";
-
-const Book = ({ data }) => {
-  return (
-    <div className="book">
-      <div className="book-cover">
-        <a href={data.previewLink && data.previewLink} target="_blank" rel="noreferrer">
-          {data.imageLinks ? (
-            <img src={data.imageLinks.smallThumbnail} alt={data.title && data.title} />
-          ) : (
-            <img src="https://i.dlpng.com/static/png/6565478_preview.png" alt="no-cover" />
-          )}
-        </a>
-      </div>
-      <div className="book-info">
-        <span className="title">{data.title && data.title}</span>
-        <div>
-          <p className="description">{data.description && data.description}</p>
-          <div className="meta">
-            <span>
-              {data.authors
-                ? data.authors.map((author, index) => (
-                    <span key={index} className="author-name">
-                      {author}
-                    </span>
-                  ))
-                : "Unknown Author"}
-              - <span className="publish-date">{data.publishedDate && data.publishedDate}</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-Book.propTypes = {
-  data: PropTypes.object.isRequired,
-};
-
-Book.defaultProps = {
-  data: {},
-};
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state.searchTerm);
@@ -52,8 +10,12 @@ const ResultPage = ({ location }) => {
   const [results, setResults] = useState("");
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
   const fetchBooks = async () => {
-    const response = await axios.get(`${API_URL}?q=${searchTerm}`);
-    setResults(response.data.items);
+    try {
+      const response = await axios.get(`${API_URL}?q=${searchTerm}`);
+      setResults(response.data.items);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
