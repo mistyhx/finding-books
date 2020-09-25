@@ -1,64 +1,89 @@
 $color: gray;
+$primary-red: #ff4f2d;
 
 .loader {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  &-bubbles {
-    list-style: none;
-    position: absolute;
-    li {
-      background-color: $color;
-      margin: 3px;
-      position: absolute;
-    }
-    li:nth-child(1) {
-      width: 14px;
-      height: 14px;
-      opacity: 0.7;
-      border-radius: 14px;
-      bottom: 50px;
-      left: 24px;
-      animation: fadeIn 1.6s ease-in-out infinite;
-    }
-
-    li:nth-child(2) {
-      width: 12px;
-      height: 12px;
-      opacity: 0.5;
-      border-radius: 12px;
-      left: 6px;
-      bottom: 40px;
-      animation: fadeIn 1.4s ease-in-out infinite;
-    }
-
-    li:nth-child(3) {
-      width: 18px;
-      height: 18px;
-      opacity: 0.4;
-      border-radius: 18px;
-      bottom: 60px;
-      left: 16px;
-      animation: fadeIn 1.8s ease-in-out infinite;
-    }
-  }
-
-  .coffee {
+  margin-top: 20%;
+  position: relative;
+  &-book {
+    border: 4px solid $primary-red;
+    width: 60px;
+    height: 45px;
     position: relative;
-    z-index: 2;
+    perspective: 150px;
+    figure {
+      display: block;
+      width: 30px;
+      height: 45px;
+      border: 4px solid $primary-red;
+      border-left: 1px solid $primary-red;
+      margin: 0;
+      position: absolute;
+      right: -4px;
+      top: -4px;
+      overflow: hidden;
+      background: $primary-red;
+      transform-style: preserve-3d;
+      -webkit-transform-origin: left center;
+      transform-origin: left center;
+    }
+
+    figure:nth-child(1) {
+      -webkit-animation: pageTurn 1.2s cubic-bezier(0, 0.39, 1, 0.68) 1.6s
+        infinite;
+      animation: pageTurn 1.2s cubic-bezier(0, 0.39, 1, 0.68) 1.6s infinite;
+    }
+
+    figure:nth-child(2) {
+      -webkit-animation: pageTurn 1.2s cubic-bezier(0, 0.39, 1, 0.68) 1.45s
+        infinite;
+      animation: pageTurn 1.2s cubic-bezier(0, 0.39, 1, 0.68) 1.45s infinite;
+    }
+
+    figure:nth-child(3) {
+      -webkit-animation: pageTurn 1.2s cubic-bezier(0, 0.39, 1, 0.68) 1.2s
+        infinite;
+      animation: pageTurn 1.2s cubic-bezier(0, 0.39, 1, 0.68) 1.2s infinite;
+    }
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 1;
-    transform: translateY(40px);
+@-webkit-keyframes pageTurn {
+  0% {
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
   }
+  20% {
+    background: $primary-red;
+  }
+  40% {
+    background: lighten($primary-red, 20);
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+  }
+  100% {
+    background: lighten($primary-red, 20);
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+  }
+}
 
-  to {
-    opacity: 0;
-    transform: translateY(-30px);
+@keyframes pageTurn {
+  0% {
+    transform: rotateY(0deg);
+  }
+  20% {
+    background: $primary-red;
+  }
+  40% {
+    background: lighten($primary-red, 20);
+    transform: rotateY(-180deg);
+  }
+  100% {
+    background: lighten($primary-red, 20);
+    transform: rotateY(-180deg);
   }
 }

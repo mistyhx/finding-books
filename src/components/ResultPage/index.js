@@ -13,6 +13,7 @@ const ResultPage = ({ location }) => {
   const [results, setResults] = useState("");
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
   const fetchBooks = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API_URL}?q=${searchTerm}`);
       setResults(response.data.items);
@@ -27,51 +28,51 @@ const ResultPage = ({ location }) => {
   }, [searchTerm]);
 
   return (
-    <div>
+    <div className="results-page">
+      <div className="pagination">
+        <div>
+          <ChevronsUp />
+        </div>
+        <div className="active-page">1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>
+          <ChevronsDown />
+        </div>
+      </div>
+      <div className="controls">
+        <div className="filters">
+          <div>
+            <span>Sort by relevance</span>
+            <ChevronDown size={16} />
+          </div>
+          <div>
+            <span>Publish date </span>
+            <ChevronDown size={16} />
+          </div>
+          <div>
+            <span> Categories </span>
+            <ChevronDown size={16} />
+          </div>
+        </div>
+        <form
+          className="search-form"
+          onSubmit={e => {
+            e.preventDefault();
+            setSearchTerm(input);
+          }}
+        >
+          <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
+          <input type="submit" value="Search" />
+        </form>
+      </div>
       {loading ? (
         <Loader />
       ) : (
-        <div className="results-page">
-          <div className="pagination">
-            <div>
-              <ChevronsUp />
-            </div>
-            <div className="active-page">1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-            <div>
-              <ChevronsDown />
-            </div>
-          </div>
-          <div className="controls">
-            <div className="filters">
-              <div>
-                <span>Sort by relevance</span>
-                <ChevronDown size={16} />
-              </div>
-              <div>
-                <span>Publish date </span>
-                <ChevronDown size={16} />
-              </div>
-              <div>
-                <span> Categories </span>
-                <ChevronDown size={16} />
-              </div>
-            </div>
-            <form
-              className="search-form"
-              onSubmit={e => {
-                e.preventDefault();
-                setSearchTerm(input);
-              }}
-            >
-              <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
-              <input type="submit" value="Search" />
-            </form>
-          </div>
-          <div className="results">
+        <div className="results">
+          {results && (
             <Transition
               items={results}
               keys={item => item.id}
@@ -86,7 +87,7 @@ const ResultPage = ({ location }) => {
                 </div>
               )}
             </Transition>
-          </div>
+          )}
         </div>
       )}
     </div>
