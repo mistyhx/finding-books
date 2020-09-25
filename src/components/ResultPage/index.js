@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Transition, animated } from "react-spring/renderprops";
 import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
 import Book from "../../components/Book";
-import "./index.css";
 import Loader from "../Loader";
+import "./index.css";
 
 const ResultPage = ({ location }) => {
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,7 @@ const ResultPage = ({ location }) => {
     try {
       const response = await axios.get(`${API_URL}?q=${searchTerm}`);
       setResults(response.data.items);
+      setLoading(false);
     } catch (e) {
       console.log(e);
     }
@@ -70,7 +72,20 @@ const ResultPage = ({ location }) => {
             </form>
           </div>
           <div className="results">
-            {results && results.map(result => <Book key={result.id} data={result.volumeInfo} />)}
+            <Transition
+              items={results}
+              keys={item => item.id}
+              from={{ opacity: 0, transform: `translateX(80px)` }}
+              enter={{ opacity: 1, transform: `translateX(0px)` }}
+              leave={{ opacity: 0, transform: `translateX(-80px)` }}
+              trail={200}
+            >
+              {item => props => (
+                <div style={props}>
+                  <Book data={item.volumeInfo} />
+                </div>
+              )}
+            </Transition>
           </div>
         </div>
       )}
