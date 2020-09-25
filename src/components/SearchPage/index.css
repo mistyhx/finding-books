@@ -42,6 +42,7 @@ input:focus {
 input[type="submit"] {
   font-family: "Didot", cursive;
   font-weight: bold;
+  font-size: 0.9rem;
   background: #ff4f2d;
   border: none;
   text-transform: uppercase;
