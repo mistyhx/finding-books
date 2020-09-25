@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Transition, animated } from "react-spring/renderprops";
-import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
+import { Transition } from "react-spring/renderprops";
+import { ChevronDown } from "react-feather";
 import Book from "../../components/Book";
+import Pagination from "../../components/Pagination";
 import Loader from "../Loader";
 import "./index.css";
 
@@ -29,19 +30,7 @@ const ResultPage = ({ location }) => {
 
   return (
     <div className="results-page">
-      <div className="pagination">
-        <div>
-          <ChevronsUp />
-        </div>
-        <div className="active-page">1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>
-          <ChevronsDown />
-        </div>
-      </div>
+      <Pagination />
       <div className="controls">
         <div className="filters">
           <div>

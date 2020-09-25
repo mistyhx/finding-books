@@ -9,24 +9,7 @@
   opacity: 1;
 }
 
-.pagination {
-  text-align: center;
-  position: fixed;
-  right: 0;
-  font-family: "Didot", cursive;
-  font-size: 2rem;
-  top: 30%;
-  right: 1.2rem;
-}
 
-.pagination div {
-  color: #bababa;
-  padding: 0.5rem 2rem;
-}
-
-.pagination .active-page {
-  color: black;
-}
 
 .controls {
   display: flex;
