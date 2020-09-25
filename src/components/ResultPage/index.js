@@ -1,59 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
+import { Transition, animated } from "react-spring/renderprops";
 import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
+import Book from "../../components/Book";
+import Loader from "../Loader";
 import "./index.css";
 
-const Book = ({ data }) => {
-  return (
-    <div className="book">
-      <div className="book-cover">
-        <a href={data.previewLink && data.previewLink} target="_blank" rel="noreferrer">
-          {data.imageLinks ? (
-            <img src={data.imageLinks.smallThumbnail} alt={data.title && data.title} />
-          ) : (
-            <img src="https://i.dlpng.com/static/png/6565478_preview.png" alt="no-cover" />
-          )}
-        </a>
-      </div>
-      <div className="book-info">
-        <span className="title">{data.title && data.title}</span>
-        <div>
-          <p className="description">{data.description && data.description}</p>
-          <div className="meta">
-            <span>
-              {data.authors
-                ? data.authors.map((author, index) => (
-                    <span key={index} className="author-name">
-                      {author}
-                    </span>
-                  ))
-                : "Unknown Author"}
-              - <span className="publish-date">{data.publishedDate && data.publishedDate}</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-Book.propTypes = {
-  data: PropTypes.object.isRequired,
-};
-
-Book.defaultProps = {
-  data: {},
-};
-
 const ResultPage = ({ location }) => {
+  const [loading, setLoading] = useState(true);
   const [input, setInput] = useState(location.state.searchTerm);
   const [searchTerm, setSearchTerm] = useState(location.state.searchTerm || "");
   const [results, setResults] = useState("");
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
   const fetchBooks = async () => {
-    const response = await axios.get(`${API_URL}?q=${searchTerm}`);
-    setResults(response.data.items);
+    setLoading(true);
+    try {
+      const response = await axios.get(`${API_URL}?q=${searchTerm}`);
+      setResults(response.data.items);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -101,9 +68,28 @@ const ResultPage = ({ location }) => {
           <input type="submit" value="Search" />
         </form>
       </div>
-      <div className="results">
-        {results && results.map(result => <Book key={result.id} data={result.volumeInfo} />)}
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="results">
+          {results && (
+            <Transition
+              items={results}
+              keys={item => item.id}
+              from={{ opacity: 0, transform: `translateX(80px)` }}
+              enter={{ opacity: 1, transform: `translateX(0px)` }}
+              leave={{ opacity: 0, transform: `translateX(-80px)` }}
+              trail={200}
+            >
+              {item => props => (
+                <div style={props}>
+                  <Book data={item.volumeInfo} />
+                </div>
+              )}
+            </Transition>
+          )}
+        </div>
+      )}
     </div>
   );
 };
