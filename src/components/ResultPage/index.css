@@ -33,25 +33,6 @@
   top: 8px;
 }
 
-.filters {
-  display: flex;
-  font-family: "Didot", cursive;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.filters div {
-  padding: 0 2rem 0 0;
-  display: flex;
-}
-
-.filters div:last-child {
-  padding: 0;
-}
-
-.filters span {
-  margin-right: 0.5rem;
-}
 
 .results-page .search-form {
   height: 40px;

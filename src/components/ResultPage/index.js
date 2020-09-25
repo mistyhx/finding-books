@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
-import { ChevronDown } from "react-feather";
-import Book from "../../components/Book";
-import Pagination from "../../components/Pagination";
+
+import Book from "../Book";
+import Pagination from "../Pagination";
 import Loader from "../Loader";
 import "./index.css";
+import Filters from "../Filters";
 
 const ResultPage = ({ location }) => {
   const [loading, setLoading] = useState(true);
@@ -32,20 +33,7 @@ const ResultPage = ({ location }) => {
     <div className="results-page">
       <Pagination />
       <div className="controls">
-        <div className="filters">
-          <div>
-            <span>Sort by relevance</span>
-            <ChevronDown size={16} />
-          </div>
-          <div>
-            <span>Publish date </span>
-            <ChevronDown size={16} />
-          </div>
-          <div>
-            <span> Categories </span>
-            <ChevronDown size={16} />
-          </div>
-        </div>
+        <Filters />
         <form
           className="search-form"
           onSubmit={e => {

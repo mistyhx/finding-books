@@ -1,0 +1,17 @@
+.filters {
+  display: flex;
+  font-family: "Didot", cursive;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  div {
+    padding: 0 2rem 0 0;
+    display: flex;
+    &:last-child {
+      padding: 0;
+    }
+    span {
+      margin-right: 0.5rem;
+    }
+  }
+}
