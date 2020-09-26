@@ -5,11 +5,10 @@ import Book from "../Book";
 import Pagination from "../Pagination";
 import Loader from "../Loader";
 import Filters from "../Filters";
-import "./index.css";
+import "./index.scss";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
-
   const initialState = {
     loading: true,
     error: null,
@@ -41,7 +40,7 @@ const ResultPage = ({ location }) => {
   const fetchBooks = async () => {
     dispatch({ type: "FETCHING" });
     try {
-      const response = await axios.get(`${API_URL}?q=${input}`);
+      const response = await axios.get(`${API_URL}?q=${input}&orderBy=relevance&maxResults=40`);
       dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
       dispatch({ type: "ERROR", payload: e });
@@ -50,12 +49,10 @@ const ResultPage = ({ location }) => {
 
   useEffect(() => {
     fetchBooks();
-    console.log(state);
   }, []);
 
   return (
     <div className="results-page">
-      <Pagination />
       <div className="controls">
         <Filters />
         <form
@@ -76,20 +73,23 @@ const ResultPage = ({ location }) => {
       ) : (
         <div className="results">
           {state.results ? (
-            <Transition
-              items={state.results}
-              keys={item => item.id}
-              from={{ opacity: 0, transform: `translateX(80px)` }}
-              enter={{ opacity: 1, transform: `translateX(0px)` }}
-              leave={{ opacity: 0, transform: `translateX(-80px)` }}
-              trail={200}
-            >
-              {item => props => (
-                <div style={props}>
-                  <Book data={item.volumeInfo} />
-                </div>
-              )}
-            </Transition>
+            <div>
+              <Transition
+                items={state.results}
+                keys={item => item.id}
+                from={{ opacity: 0, transform: `translateX(80px)` }}
+                enter={{ opacity: 1, transform: `translateX(0px)` }}
+                leave={{ opacity: 0, transform: `translateX(-80px)` }}
+                trail={200}
+              >
+                {item => props => (
+                  <div style={props}>
+                    <Book data={item.volumeInfo} />
+                  </div>
+                )}
+              </Transition>
+              <Pagination pageSize={10} total={state.results.length} />
+            </div>
           ) : (
             "No Result Found"
           )}
