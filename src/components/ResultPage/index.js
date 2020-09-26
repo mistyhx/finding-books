@@ -62,7 +62,9 @@ const ResultPage = ({ location }) => {
           className="search-form"
           onSubmit={e => {
             e.preventDefault();
-            fetchBooks();
+            if (input) {
+              fetchBooks();
+            }
           }}
         >
           <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
