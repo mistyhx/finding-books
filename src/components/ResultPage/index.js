@@ -8,7 +8,7 @@ import Filters from "../Filters";
 import "./index.css";
 
 const ResultPage = ({ location }) => {
-  const [input, setInput] = useState(location.state.searchTerm);
+  const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
 
   const initialState = {
     loading: true,
