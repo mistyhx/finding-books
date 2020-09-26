@@ -52,6 +52,7 @@ const ResultPage = ({ location }) => {
 
   useEffect(() => {
     fetchBooks();
+    console.log(state);
   }, [searchTerm]);
 
   return (
@@ -74,7 +75,7 @@ const ResultPage = ({ location }) => {
         <Loader />
       ) : (
         <div className="results">
-          {state.results && (
+          {state.results ? (
             <Transition
               items={state.results}
               keys={item => item.id}
@@ -89,6 +90,8 @@ const ResultPage = ({ location }) => {
                 </div>
               )}
             </Transition>
+          ) : (
+            "No Result Found"
           )}
         </div>
       )}
