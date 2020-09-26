@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
 
@@ -9,19 +9,44 @@ import "./index.css";
 import Filters from "../Filters";
 
 const ResultPage = ({ location }) => {
-  const [loading, setLoading] = useState(true);
   const [input, setInput] = useState(location.state.searchTerm);
   const [searchTerm, setSearchTerm] = useState(location.state.searchTerm || "");
-  const [results, setResults] = useState("");
+
+  const initialState = {
+    loading: true,
+    error: null,
+    results: [],
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "FETCHING":
+        return {
+          loading: true,
+          error: null,
+          results: [],
+        };
+      case "COMPLETE":
+        return { loading: false, error: null, results: action.payload };
+      case "ERROR":
+        return {
+          loading: false,
+          error: action.payload,
+          results: [],
+        };
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
   const fetchBooks = async () => {
-    setLoading(true);
+    dispatch({ type: "FETCHING" });
     try {
       const response = await axios.get(`${API_URL}?q=${searchTerm}`);
-      setResults(response.data.items);
-      setLoading(false);
+      dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
-      console.log(e);
+      dispatch({ type: "ERROR", payload: e });
     }
   };
 
@@ -45,13 +70,13 @@ const ResultPage = ({ location }) => {
           <input type="submit" value="Search" />
         </form>
       </div>
-      {loading ? (
+      {state.loading ? (
         <Loader />
       ) : (
         <div className="results">
-          {results && (
+          {state.results && (
             <Transition
-              items={results}
+              items={state.results}
               keys={item => item.id}
               from={{ opacity: 0, transform: `translateX(80px)` }}
               enter={{ opacity: 1, transform: `translateX(0px)` }}
