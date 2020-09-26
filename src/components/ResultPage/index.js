@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
-
 import Book from "../Book";
 import Pagination from "../Pagination";
 import Loader from "../Loader";
-import "./index.css";
 import Filters from "../Filters";
+import "./index.css";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state.searchTerm);
-  const [searchTerm, setSearchTerm] = useState(location.state.searchTerm || "");
 
   const initialState = {
     loading: true,
@@ -43,7 +41,7 @@ const ResultPage = ({ location }) => {
   const fetchBooks = async () => {
     dispatch({ type: "FETCHING" });
     try {
-      const response = await axios.get(`${API_URL}?q=${searchTerm}`);
+      const response = await axios.get(`${API_URL}?q=${input}`);
       dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
       dispatch({ type: "ERROR", payload: e });
@@ -53,7 +51,7 @@ const ResultPage = ({ location }) => {
   useEffect(() => {
     fetchBooks();
     console.log(state);
-  }, [searchTerm]);
+  }, []);
 
   return (
     <div className="results-page">
@@ -64,7 +62,7 @@ const ResultPage = ({ location }) => {
           className="search-form"
           onSubmit={e => {
             e.preventDefault();
-            setSearchTerm(input);
+            fetchBooks();
           }}
         >
           <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
