@@ -14,6 +14,7 @@ const ResultPage = ({ location }) => {
     loading: true,
     error: null,
     results: [],
+    current: 1,
   };
 
   const reducer = (state, action) => {
@@ -41,7 +42,7 @@ const ResultPage = ({ location }) => {
   const fetchBooks = async () => {
     dispatch({ type: "FETCHING" });
     try {
-      const response = await axios.get(`${API_URL}?q=${input}&orderBy=relevance&maxResults=40`);
+      const response = await axios.get(`${API_URL}?q=${input}&orderBy=relevance&startIndex=${(current - 1) * 10}`);
       dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
       dispatch({ type: "ERROR", payload: e });
@@ -52,9 +53,10 @@ const ResultPage = ({ location }) => {
     fetchBooks();
   }, []);
 
-  const lastBook = current * 10;
-  const firstBook = lastBook - 10;
-  const currentBooks = state.results.slice(firstBook, lastBook);
+  const handleChangePage = number => {
+    setCurrent(number);
+    fetchBooks();
+  };
 
   return (
     <div className="results-page">
@@ -85,7 +87,7 @@ const ResultPage = ({ location }) => {
                 from={{ opacity: 0, transform: `translateX(80px)` }}
                 enter={{ opacity: 1, transform: `translateX(0px)` }}
                 leave={{ opacity: 0, transform: `translateX(-80px)` }}
-                // trail={100}
+                trail={200}
               >
                 {item => props => (
                   <div style={props}>
@@ -93,12 +95,7 @@ const ResultPage = ({ location }) => {
                   </div>
                 )}
               </Transition>
-              <Pagination
-                current={current}
-                pageSize={10}
-                total={state.results.length}
-                onChange={number => setCurrent(number)}
-              />
+              <Pagination current={current} pageSize={10} total={40} onChange={number => handleChangePage(number)} />
             </div>
           ) : (
             "No Result Found"
