@@ -1,92 +1,114 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
-import { Transition, animated } from "react-spring/renderprops";
-import { ChevronDown, ChevronsUp, ChevronsDown } from "react-feather";
-import Book from "../../components/Book";
+import { Transition } from "react-spring/renderprops";
+import Book from "../Book";
+import Pagination from "../Pagination";
 import Loader from "../Loader";
-import "./index.css";
+import Filters from "../Filters";
+import "./index.scss";
 
 const ResultPage = ({ location }) => {
-  const [loading, setLoading] = useState(true);
-  const [input, setInput] = useState(location.state.searchTerm);
-  const [searchTerm, setSearchTerm] = useState(location.state.searchTerm || "");
-  const [results, setResults] = useState("");
+  const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
+  const [current, setCurrent] = useState(1);
+  const initialState = {
+    loading: true,
+    error: null,
+    results: [],
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "FETCHING":
+        return {
+          loading: true,
+          error: null,
+          results: [],
+        };
+      case "COMPLETE":
+        return { loading: false, error: null, results: action.payload };
+      case "ERROR":
+        return {
+          loading: false,
+          error: action.payload,
+          results: [],
+        };
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-  const fetchBooks = async () => {
-    setLoading(true);
+  const fetchBooks = async (parameters = { sorting: "relevance", type: "all" }) => {
+    dispatch({ type: "FETCHING" });
+    console.log(parameters);
     try {
-      const response = await axios.get(`${API_URL}?q=${searchTerm}`);
-      setResults(response.data.items);
-      setLoading(false);
+      const response = await axios.get(
+        `${API_URL}?q=${input}&orderBy=${parameters.sorting}&printType=${parameters.type}&maxResults=40`
+      );
+      dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
-      console.log(e);
+      dispatch({ type: "ERROR", payload: e });
     }
   };
 
   useEffect(() => {
     fetchBooks();
-  }, [searchTerm]);
+  }, []);
+
+  const handleChangePage = number => {
+    setCurrent(number);
+    fetchBooks();
+  };
+
+  const lastBook = current * 10;
+  const firstBook = lastBook - 10;
 
   return (
     <div className="results-page">
-      <div className="pagination">
-        <div>
-          <ChevronsUp />
-        </div>
-        <div className="active-page">1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>
-          <ChevronsDown />
-        </div>
-      </div>
       <div className="controls">
-        <div className="filters">
-          <div>
-            <span>Sort by relevance</span>
-            <ChevronDown size={16} />
-          </div>
-          <div>
-            <span>Publish date </span>
-            <ChevronDown size={16} />
-          </div>
-          <div>
-            <span> Categories </span>
-            <ChevronDown size={16} />
-          </div>
-        </div>
+        <Filters fetchData={parameters => fetchBooks(parameters)} />
         <form
           className="search-form"
           onSubmit={e => {
             e.preventDefault();
-            setSearchTerm(input);
+            if (input) {
+              fetchBooks();
+            }
           }}
         >
           <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
           <input type="submit" value="Search" />
         </form>
       </div>
-      {loading ? (
+      {state.loading ? (
         <Loader />
       ) : (
         <div className="results">
-          {results && (
-            <Transition
-              items={results}
-              keys={item => item.id}
-              from={{ opacity: 0, transform: `translateX(80px)` }}
-              enter={{ opacity: 1, transform: `translateX(0px)` }}
-              leave={{ opacity: 0, transform: `translateX(-80px)` }}
-              trail={200}
-            >
-              {item => props => (
-                <div style={props}>
-                  <Book data={item.volumeInfo} />
-                </div>
-              )}
-            </Transition>
+          {state.results ? (
+            <div>
+              <Transition
+                items={state.results.slice(firstBook, lastBook)}
+                keys={item => item.id}
+                from={{ opacity: 0, transform: `translateX(80px)` }}
+                enter={{ opacity: 1, transform: `translateX(0px)` }}
+                leave={{ opacity: 0, transform: `translateX(-80px)` }}
+                trail={200}
+              >
+                {item => props => (
+                  <div style={props}>
+                    <Book data={item.volumeInfo} />
+                  </div>
+                )}
+              </Transition>
+              <Pagination
+                current={current}
+                pageSize={10}
+                total={state.results.length}
+                onChange={number => handleChangePage(number)}
+              />
+            </div>
+          ) : (
+            "No Result Found"
           )}
         </div>
       )}

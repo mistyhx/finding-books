@@ -5,29 +5,6 @@
   position: relative;
 }
 
-.results {
-  opacity: 1;
-}
-
-.pagination {
-  text-align: center;
-  position: fixed;
-  right: 0;
-  font-family: "Didot", cursive;
-  font-size: 2rem;
-  top: 30%;
-  right: 1.2rem;
-}
-
-.pagination div {
-  color: #bababa;
-  padding: 0.5rem 2rem;
-}
-
-.pagination .active-page {
-  color: black;
-}
-
 .controls {
   display: flex;
   width: 100%;
@@ -50,32 +27,10 @@
   top: 8px;
 }
 
-.filters {
-  display: flex;
-  font-family: "Didot", cursive;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.filters div {
-  padding: 0 2rem 0 0;
-  display: flex;
-}
-
-.filters div:last-child {
-  padding: 0;
-}
-
-.filters span {
-  margin-right: 0.5rem;
-}
-
 .results-page .search-form {
   height: 40px;
   min-width: 360px;
 }
-
-
 
 .author-name {
   padding-right: 0.5rem;
@@ -127,8 +82,6 @@
   }
 }
 
-
-
 @media only screen and (max-width: 425px) {
   .results-page {
     padding: 2rem 1rem;
@@ -161,14 +114,5 @@
 
   .meta {
     margin-top: 1rem;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
