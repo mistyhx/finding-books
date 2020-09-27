@@ -39,7 +39,7 @@ const ResultPage = ({ location }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-  const fetchBooks = async () => {
+  const fetchBooks = async parameters => {
     dispatch({ type: "FETCHING" });
     try {
       const response = await axios.get(`${API_URL}?q=${input}&orderBy=relevance&maxResults=40`);
@@ -64,7 +64,7 @@ const ResultPage = ({ location }) => {
   return (
     <div className="results-page">
       <div className="controls">
-        <Filters />
+        <Filters fetchData={parameters => fetchBooks(parameters)} />
         <form
           className="search-form"
           onSubmit={e => {
