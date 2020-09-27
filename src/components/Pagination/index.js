@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ChevronsUp, ChevronsDown } from "react-feather";
 import "./index.scss";
 
-const Pagination = ({ pageSize, total, current }) => {
+const Pagination = ({ pageSize, total, current, onChange }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(total / pageSize); i++) {
@@ -13,10 +13,12 @@ const Pagination = ({ pageSize, total, current }) => {
   return (
     <div className="pagination">
       <div>
-        <ChevronsUp />
+        <ChevronsUp onClick={() => onChange} />
       </div>
       {pageNumbers.map(number => (
-        <div className={`${current === number && "active-page"}`}>{number}</div>
+        <div key={number} className={`${current === number && "active-page"}`} onClick={() => onChange(number)}>
+          {number}
+        </div>
       ))}
       <div>
         <ChevronsDown />
@@ -29,12 +31,14 @@ Pagination.propTypes = {
   current: PropTypes.number,
   total: PropTypes.number,
   pageSize: PropTypes.number,
+  onChange: PropTypes.func,
 };
 
 Pagination.defaultProps = {
   current: 1,
   total: 40,
   pageSize: 10,
+  onChange: () => {},
 };
 
 export default Pagination;

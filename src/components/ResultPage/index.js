@@ -9,6 +9,7 @@ import "./index.scss";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
+  const [current, setCurrent] = useState(1);
   const initialState = {
     loading: true,
     error: null,
@@ -51,6 +52,10 @@ const ResultPage = ({ location }) => {
     fetchBooks();
   }, []);
 
+  const lastBook = current * 10;
+  const firstBook = lastBook - 10;
+  const currentBooks = state.results.slice(firstBook, lastBook);
+
   return (
     <div className="results-page">
       <div className="controls">
@@ -80,7 +85,7 @@ const ResultPage = ({ location }) => {
                 from={{ opacity: 0, transform: `translateX(80px)` }}
                 enter={{ opacity: 1, transform: `translateX(0px)` }}
                 leave={{ opacity: 0, transform: `translateX(-80px)` }}
-                trail={200}
+                // trail={100}
               >
                 {item => props => (
                   <div style={props}>
@@ -88,7 +93,12 @@ const ResultPage = ({ location }) => {
                   </div>
                 )}
               </Transition>
-              <Pagination pageSize={10} total={state.results.length} />
+              <Pagination
+                current={current}
+                pageSize={10}
+                total={state.results.length}
+                onChange={number => setCurrent(number)}
+              />
             </div>
           ) : (
             "No Result Found"
