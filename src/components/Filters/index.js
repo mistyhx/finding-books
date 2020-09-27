@@ -1,50 +1,60 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { ChevronDown } from "react-feather";
 import "./index.scss";
 
 const sorting = ["relevance", "newest"];
 const format = ["all", "books", "magazines"];
 
-const FilterMenu = ({ type, options, fetchData }) => {
+const FilterMenu = ({ format, options, fetchData }) => {
   const initialFilters = {
     sorting: "relevance",
-    type: "all",
+    format: "all",
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
       case "UPDATE_SORT":
+        console.log("update sort", state);
         return {
           ...state,
-          type: state.type,
+          sorting: action.payload.item,
         };
 
       case "UPDATE_FORMAT":
+        console.log("update format", state);
         return {
           ...state,
-          type: action.payload,
+          format: action.payload.item,
         };
+      default:
+        return state;
     }
   };
 
   const [state, dispatch] = useReducer(reducer, initialFilters);
 
+  useEffect(() => {
+    console.log("fetch", state);
+    fetchData(state);
+  }, []);
+
   const handleOnClick = item => {
-    if (type === "sorting") {
-      dispatch({ type: "UPDATE_SORT", payload: item });
-      fetchData(state);
+    console.log("before-branching", state);
+    if (format === "sorting") {
+      console.log("sorting-click", state);
+      dispatch({ type: "UPDATE_SORT", payload: { item: item } });
     }
 
-    if (type === "format") {
-      dispatch({ type: "UPDATE_FORMAT", payload: item });
-      fetchData(state);
+    if (format === "format") {
+      console.log("format-onClick", state);
+      dispatch({ type: "UPDATE_FORMAT", payload: { item: item } });
     }
   };
 
   return (
     <div className="filters-menu">
       <div className="filters-menu-selected">
-        <span>{type === "sorting" ? `By ${state.sorting}` : `${state.type}`}</span>
+        <span>{format === "sorting" ? `By ${state.sorting}` : `${state.format}`}</span>
         <ChevronDown size={16} />
       </div>
       <div className="filters-menu-options">
@@ -61,8 +71,8 @@ const FilterMenu = ({ type, options, fetchData }) => {
 const Filters = ({ fetchData }) => {
   return (
     <div className="filters">
-      <FilterMenu type="sorting" options={sorting} fetchData={state => fetchData(state)} />
-      <FilterMenu type="format" options={format} fetchData={state => fetchData(state)} />
+      <FilterMenu format="sorting" options={sorting} fetchData={parameters => fetchData(parameters)} />
+      <FilterMenu format="format" options={format} fetchData={parameters => fetchData(parameters)} />
     </div>
   );
 };
