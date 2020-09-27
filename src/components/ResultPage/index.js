@@ -14,7 +14,6 @@ const ResultPage = ({ location }) => {
     loading: true,
     error: null,
     results: [],
-    current: 1,
   };
 
   const reducer = (state, action) => {
@@ -39,10 +38,13 @@ const ResultPage = ({ location }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-  const fetchBooks = async parameters => {
+  const fetchBooks = async (parameters = { sorting: "relevance", type: "all" }) => {
     dispatch({ type: "FETCHING" });
+    console.log(parameters);
     try {
-      const response = await axios.get(`${API_URL}?q=${input}&orderBy=relevance&maxResults=40`);
+      const response = await axios.get(
+        `${API_URL}?q=${input}&orderBy=${parameters.sorting}&printType=${parameters.type}&maxResults=40`
+      );
       dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
       dispatch({ type: "ERROR", payload: e });

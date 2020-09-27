@@ -15,13 +15,13 @@ const FilterMenu = ({ type, options, fetchData }) => {
     switch (action.type) {
       case "UPDATE_SORT":
         return {
-          sorting: action.payload,
+          ...state,
           type: state.type,
         };
 
       case "UPDATE_FORMAT":
         return {
-          sorting: state.sorting,
+          ...state,
           type: action.payload,
         };
     }
