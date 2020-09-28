@@ -57,7 +57,6 @@ const Filters = ({ fetchData }) => {
 
   return (
     <div className="filters">
-      {console.log(state)}
       <FilterMenu
         filterType="sorting"
         options={sorting}
