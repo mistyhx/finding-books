@@ -1,7 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { ChevronDown } from "react-feather";
-import "./index.scss";
 import { SearchContext } from "../../context/SearchContext";
+import "./index.scss";
 
 const sorting = ["relevance", "newest"];
 const format = ["all", "books", "magazines"];
@@ -24,11 +25,22 @@ const FilterMenu = ({ filterType, options, onSelect, selected }) => {
   );
 };
 
-const Filters = ({ fetchData }) => {
+FilterMenu.propTypes = {
+  filterType: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired,
+};
+
+FilterMenu.defaultProps = {
+  filterType: "",
+  options: [],
+  onSelect: () => {},
+  selected: {},
+};
+
+const Filters = ({}) => {
   const { parameters, updateSorting, updateFormat } = useContext(SearchContext);
-  useEffect(() => {
-    fetchData();
-  }, [parameters]);
 
   return (
     <div className="filters">

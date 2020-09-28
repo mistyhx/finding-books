@@ -45,9 +45,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .filters {
-    font-size: 0.8rem;
-  }
   .pagination {
     font-size: 1.5rem;
   }
@@ -57,12 +54,6 @@
   .controls {
     flex-direction: column;
     padding: 1rem 0;
-  }
-
-  .filters {
-    margin-bottom: 2rem;
-    width: 80%;
-    justify-content: space-between;
   }
 
   .results-page .search-form {
@@ -77,9 +68,6 @@
   .results-page {
     padding: 2rem;
   }
-  .filters {
-    width: 100%;
-  }
 }
 
 @media only screen and (max-width: 425px) {
@@ -89,21 +77,6 @@
   .book {
     margin: 4rem 0;
   }
-  .filters {
-    font-size: 0.6rem;
-  }
-  .filters div {
-    padding: 0 1rem 0 0;
-  }
-
-  .filters div:last-child {
-    padding: 0;
-  }
-
-  .filters span {
-    margin-right: 0.2rem;
-    transform: translateY(2px);
-  }
 
   .book-cover {
     height: 100%;
@@ -111,7 +84,6 @@
   .book-cover img {
     width: 80px;
   }
-
   .meta {
     margin-top: 1rem;
   }

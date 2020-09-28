@@ -43,7 +43,6 @@ const ResultPage = ({ location }) => {
 
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
   const fetchBooks = async () => {
-    console.log(parameters);
     dispatch({ type: "FETCHING" });
     try {
       const response = await axios.get(
@@ -57,7 +56,7 @@ const ResultPage = ({ location }) => {
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [parameters]);
 
   const handleChangePage = number => {
     setCurrent(number);
