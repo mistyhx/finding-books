@@ -38,19 +38,6 @@ const FilterMenu = ({ format, options, fetchData }) => {
     fetchData(state);
   }, []);
 
-  const handleOnClick = item => {
-    console.log("before-branching", state);
-    if (format === "sorting") {
-      console.log("sorting-click", state);
-      dispatch({ type: "UPDATE_SORT", payload: { item: item } });
-    }
-
-    if (format === "format") {
-      console.log("format-onClick", state);
-      dispatch({ type: "UPDATE_FORMAT", payload: { item: item } });
-    }
-  };
-
   return (
     <div className="filters-menu">
       <div className="filters-menu-selected">
@@ -59,7 +46,12 @@ const FilterMenu = ({ format, options, fetchData }) => {
       </div>
       <div className="filters-menu-options">
         {options.map((item, index) => (
-          <div key={index} onClick={() => handleOnClick(item)}>
+          <div
+            key={index}
+            onClick={() =>
+              dispatch({ type: format === "sorting" ? "UPDATE_SORT" : "UPDATE_FORMAT", payload: { item: item } })
+            }
+          >
             {item}
           </div>
         ))}
