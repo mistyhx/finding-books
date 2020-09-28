@@ -57,7 +57,7 @@ const ResultPage = ({ location }) => {
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [parameters]);
 
   const handleChangePage = number => {
     setCurrent(number);

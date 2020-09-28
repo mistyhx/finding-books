@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { ChevronDown } from "react-feather";
 import "./index.scss";
 import { SearchContext } from "../../context/SearchContext";
@@ -24,11 +24,8 @@ const FilterMenu = ({ filterType, options, onSelect, selected }) => {
   );
 };
 
-const Filters = ({ fetchData }) => {
+const Filters = ({}) => {
   const { parameters, updateSorting, updateFormat } = useContext(SearchContext);
-  useEffect(() => {
-    fetchData();
-  }, [parameters]);
 
   return (
     <div className="filters">
