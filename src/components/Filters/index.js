@@ -5,53 +5,16 @@ import "./index.scss";
 const sorting = ["relevance", "newest"];
 const format = ["all", "books", "magazines"];
 
-const FilterMenu = ({ format, options, fetchData }) => {
-  const initialFilters = {
-    sorting: "relevance",
-    format: "all",
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "UPDATE_SORT":
-        console.log("update sort", state);
-        return {
-          ...state,
-          sorting: action.payload.item,
-        };
-
-      case "UPDATE_FORMAT":
-        console.log("update format", state);
-        return {
-          ...state,
-          format: action.payload.item,
-        };
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialFilters);
-
-  useEffect(() => {
-    console.log("fetch", state);
-    fetchData(state);
-  }, []);
-
+const FilterMenu = ({ filterType, options, onSelect, selected }) => {
   return (
     <div className="filters-menu">
       <div className="filters-menu-selected">
-        <span>{format === "sorting" ? `By ${state.sorting}` : `${state.format}`}</span>
+        <span>{filterType === "sorting" ? `By ${selected.sorting}` : `${selected.format}`}</span>
         <ChevronDown size={16} />
       </div>
       <div className="filters-menu-options">
         {options.map((item, index) => (
-          <div
-            key={index}
-            onClick={() =>
-              dispatch({ type: format === "sorting" ? "UPDATE_SORT" : "UPDATE_FORMAT", payload: { item: item } })
-            }
-          >
+          <div key={index} onClick={() => onSelect(item)}>
             {item}
           </div>
         ))}
@@ -61,10 +24,52 @@ const FilterMenu = ({ format, options, fetchData }) => {
 };
 
 const Filters = ({ fetchData }) => {
+  const initialFilters = {
+    sorting: "relevance",
+    format: "all",
+    count: 0,
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "UPDATE_SORT":
+        return {
+          ...state,
+          sorting: action.payload,
+        };
+
+      case "UPDATE_FORMAT":
+        return {
+          ...state,
+          format: action.payload,
+        };
+
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialFilters);
+
+  useEffect(() => {
+    fetchData(state);
+  }, [state]);
+
   return (
     <div className="filters">
-      <FilterMenu format="sorting" options={sorting} fetchData={parameters => fetchData(parameters)} />
-      <FilterMenu format="format" options={format} fetchData={parameters => fetchData(parameters)} />
+      {console.log(state)}
+      <FilterMenu
+        filterType="sorting"
+        options={sorting}
+        selected={state}
+        onSelect={item => dispatch({ type: "UPDATE_SORT", payload: item })}
+      />
+      <FilterMenu
+        filterType="format"
+        options={format}
+        selected={state}
+        onSelect={item => dispatch({ type: "UPDATE_FORMAT", payload: item })}
+      />
     </div>
   );
 };
