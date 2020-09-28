@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { ChevronDown } from "react-feather";
 import { SearchContext } from "../../context/SearchContext";
 import "./index.scss";
@@ -22,6 +23,20 @@ const FilterMenu = ({ filterType, options, onSelect, selected }) => {
       </div>
     </div>
   );
+};
+
+FilterMenu.propTypes = {
+  filterType: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired,
+};
+
+FilterMenu.defaultProps = {
+  filterType: "",
+  options: [],
+  onSelect: () => {},
+  selected: {},
 };
 
 const Filters = ({}) => {

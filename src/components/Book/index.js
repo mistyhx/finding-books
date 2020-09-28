@@ -6,7 +6,7 @@ const Book = ({ data }) => {
   return (
     <div className="book">
       <div className="book-cover">
-        <a href={data.previewLink && data.previewLink} target="_blank" rel="noreferrer">
+        <a href={data.previewLink && data.previewLink} target="_blank" rel="noopener noreferrer">
           {data.imageLinks ? (
             <img src={data.imageLinks.smallThumbnail} alt={data.title && data.title} />
           ) : (
