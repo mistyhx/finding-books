@@ -1,6 +1,7 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { ChevronDown } from "react-feather";
 import "./index.scss";
+import { SearchContext } from "../../context/SearchContext";
 
 const sorting = ["relevance", "newest"];
 const format = ["all", "books", "magazines"];
@@ -24,51 +25,15 @@ const FilterMenu = ({ filterType, options, onSelect, selected }) => {
 };
 
 const Filters = ({ fetchData }) => {
-  const initialFilters = {
-    sorting: "relevance",
-    format: "all",
-    count: 0,
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "UPDATE_SORT":
-        return {
-          ...state,
-          sorting: action.payload,
-        };
-
-      case "UPDATE_FORMAT":
-        return {
-          ...state,
-          format: action.payload,
-        };
-
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialFilters);
-
+  const { parameters, updateSorting, updateFormat } = useContext(SearchContext);
   useEffect(() => {
-    fetchData(state);
-  }, [state]);
+    fetchData();
+  }, [parameters]);
 
   return (
     <div className="filters">
-      <FilterMenu
-        filterType="sorting"
-        options={sorting}
-        selected={state}
-        onSelect={item => dispatch({ type: "UPDATE_SORT", payload: item })}
-      />
-      <FilterMenu
-        filterType="format"
-        options={format}
-        selected={state}
-        onSelect={item => dispatch({ type: "UPDATE_FORMAT", payload: item })}
-      />
+      <FilterMenu filterType="sorting" options={sorting} selected={parameters} onSelect={item => updateSorting(item)} />
+      <FilterMenu filterType="format" options={format} selected={parameters} onSelect={item => updateFormat(item)} />
     </div>
   );
 };

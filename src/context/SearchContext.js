@@ -25,6 +25,7 @@ export const SearchContextProvider = ({ children }) => {
   const initialState = {
     sorting: "relevance",
     format: "all",
+    from: "context",
   };
 
   const updateSorting = item => {
