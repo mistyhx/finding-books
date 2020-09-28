@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
 import Book from "../Book";
@@ -6,10 +6,13 @@ import Pagination from "../Pagination";
 import Loader from "../Loader";
 import Filters from "../Filters";
 import "./index.scss";
+import { SearchContext } from "../../context/SearchContext";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
   const [current, setCurrent] = useState(1);
+  const { parameters, updateSorting } = useContext(SearchContext);
+  console.log(parameters, updateSorting);
   const initialState = {
     loading: true,
     error: null,

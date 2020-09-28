@@ -27,15 +27,15 @@ export const SearchContextProvider = ({ children }) => {
     format: "all",
   };
 
-  const updateSorting = (item) => {
+  const updateSorting = item => {
     dispatch({ type: "UPDATE_SORT", payload: item });
   };
 
-  const updateFormat = (item)=>{
-    dispatch({ type: "UPDATE_FORMAT", payload: item }
-  }
+  const updateFormat = item => {
+    dispatch({ type: "UPDATE_FORMAT", payload: item });
+  };
 
   const [parameters, dispatch] = useReducer(reducer, initialState);
-  const value = {parameters,updateFormat,updateSorting};
+  const value = { parameters, updateFormat, updateSorting };
   return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>;
 };
