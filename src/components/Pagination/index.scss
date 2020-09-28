@@ -7,10 +7,19 @@
   top: 30%;
   right: 1.2rem;
 
+  .inactive-previous {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
   div {
     color: #bababa;
     padding: 0.5rem 2rem;
     cursor: pointer;
+
+    svg {
+      color: #191919;
+    }
 
     &:hover {
       opacity: 0.7;

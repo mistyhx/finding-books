@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ChevronDown } from "react-feather";
-import "./index.scss";
 import { SearchContext } from "../../context/SearchContext";
+import "./index.scss";
 
 const sorting = ["relevance", "newest"];
 const format = ["all", "books", "magazines"];

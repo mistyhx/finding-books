@@ -12,15 +12,15 @@ const Pagination = ({ pageSize, total, current, onChange }) => {
 
   return (
     <div className="pagination">
-      <div>
-        <ChevronsUp onClick={() => onChange} />
+      <div className={`${current === 1 && "inactive-previous"}`} onClick={() => onChange(current - 1)}>
+        <ChevronsUp />
       </div>
       {pageNumbers.map(number => (
         <div key={number} className={`${current === number && "active-page"}`} onClick={() => onChange(number)}>
           {number}
         </div>
       ))}
-      <div>
+      <div className={`${current === pageNumbers.length && "inactive-previous"}`} onClick={() => onChange(current + 1)}>
         <ChevronsDown />
       </div>
     </div>
