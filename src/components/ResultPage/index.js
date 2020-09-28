@@ -32,18 +32,19 @@ const ResultPage = ({ location }) => {
           error: action.payload,
           results: [],
         };
+      default:
+        return state;
     }
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-  const fetchBooks = async (parameters = { sorting: "relevance", type: "all" }) => {
+  const fetchBooks = async (parameters = { sorting: "relevance", format: "all" }) => {
     dispatch({ type: "FETCHING" });
-    console.log(parameters);
     try {
       const response = await axios.get(
-        `${API_URL}?q=${input}&orderBy=${parameters.sorting}&printType=${parameters.type}&maxResults=40`
+        `${API_URL}?q=${input}&orderBy=${parameters.sorting}&printType=${parameters.format}&maxResults=40`
       );
       dispatch({ type: "COMPLETE", payload: response.data.items });
     } catch (e) {
