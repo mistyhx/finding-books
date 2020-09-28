@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
 import Book from "../Book";
@@ -6,10 +6,12 @@ import Pagination from "../Pagination";
 import Loader from "../Loader";
 import Filters from "../Filters";
 import "./index.scss";
+import { SearchContext } from "../../context/SearchContext";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
   const [current, setCurrent] = useState(1);
+  const { parameters } = useContext(SearchContext);
   const initialState = {
     loading: true,
     error: null,
@@ -40,7 +42,8 @@ const ResultPage = ({ location }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const API_URL = `https://www.googleapis.com/books/v1/volumes`;
-  const fetchBooks = async (parameters = { sorting: "relevance", format: "all" }) => {
+  const fetchBooks = async () => {
+    console.log(parameters);
     dispatch({ type: "FETCHING" });
     try {
       const response = await axios.get(
