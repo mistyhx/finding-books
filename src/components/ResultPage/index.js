@@ -71,58 +71,60 @@ const ResultPage = ({ location }) => {
   const firstBook = lastBook - 10;
 
   return (
-    <div className="results-page">
-      {open ? <Bookshelf /> : null}
-      <div className="controls">
-        <button>
-          <Grid onClick={() => setOpen(!open)} size={18} />
-        </button>
-        <Filters fetchData={parameters => fetchBooks(parameters)} />
-        <form
-          className="search-form"
-          onSubmit={e => {
-            e.preventDefault();
-            if (input) {
-              fetchBooks();
-            }
-          }}
-        >
-          <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
-          <input type="submit" value="Search" />
-        </form>
-      </div>
-      {state.loading ? (
-        <Loader />
-      ) : (
-        <div className="results">
-          {state.results ? (
-            <div>
-              <Transition
-                items={state.results.slice(firstBook, lastBook)}
-                keys={item => item.id}
-                from={{ opacity: 0, transform: `translateX(80px)` }}
-                enter={{ opacity: 1, transform: `translateX(0px)` }}
-                leave={{ opacity: 0, transform: `translateX(-80px)` }}
-                trail={200}
-              >
-                {item => props => (
-                  <div style={props}>
-                    <Book data={item} />
-                  </div>
-                )}
-              </Transition>
-              <Pagination
-                current={current}
-                pageSize={10}
-                total={state.results.length}
-                onChange={number => handleChangePage(number)}
-              />
-            </div>
-          ) : (
-            "No Result Found"
-          )}
+    <div>
+      <Bookshelf open={open} />
+      <div className="results-page">
+        <div className="controls">
+          <button onClick={() => setOpen(!open)}>
+            <Grid size={18} />
+          </button>
+          <Filters fetchData={parameters => fetchBooks(parameters)} />
+          <form
+            className="search-form"
+            onSubmit={e => {
+              e.preventDefault();
+              if (input) {
+                fetchBooks();
+              }
+            }}
+          >
+            <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
+            <input type="submit" value="Search" />
+          </form>
         </div>
-      )}
+        {state.loading ? (
+          <Loader />
+        ) : (
+          <div className="results">
+            {state.results ? (
+              <div>
+                <Transition
+                  items={state.results.slice(firstBook, lastBook)}
+                  keys={item => item.id}
+                  from={{ opacity: 0, transform: `translateX(80px)` }}
+                  enter={{ opacity: 1, transform: `translateX(0px)` }}
+                  leave={{ opacity: 0, transform: `translateX(-80px)` }}
+                  trail={200}
+                >
+                  {item => props => (
+                    <div style={props}>
+                      <Book data={item} />
+                    </div>
+                  )}
+                </Transition>
+                <Pagination
+                  current={current}
+                  pageSize={10}
+                  total={state.results.length}
+                  onChange={number => handleChangePage(number)}
+                />
+              </div>
+            ) : (
+              "No Result Found"
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

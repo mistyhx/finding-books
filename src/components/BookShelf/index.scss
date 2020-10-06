@@ -1,0 +1,14 @@
+@import "../../styling/colors";
+
+.bookshelf {
+  background: $background-gray;
+  height: 12rem;
+  padding: 1rem;
+
+  .favorite-books-list {
+    display: flex;
+    .favorite-book {
+      padding: 0 1rem;
+    }
+  }
+}

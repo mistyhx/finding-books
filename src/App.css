@@ -25,7 +25,7 @@ a:visited {
 .logo {
   z-index: 99;
   position: absolute;
-  left: 1rem;
+  right: 1rem;
   top: 1rem;
 }
 

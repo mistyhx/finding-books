@@ -1,23 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
+import { useSpring, useTransition, animated } from "react-spring";
 import "./index.scss";
 import { BookshelfContext } from "../../context/BooksehlfContext";
 
-const Bookshelf = () => {
+const Bookshelf = ({ open }) => {
   const { savedBooks } = useContext(BookshelfContext);
-  console.log(savedBooks.books);
+
+  const props = useSpring({
+    opacity: open ? 1 : 0,
+    height: open ? "12rem" : "0rem",
+  });
 
   return (
-    <div className="bookshelf">
+    <animated.div className="bookshelf" style={props}>
       <h3>Favorites</h3>
       <div className="favorite-books-list">
         {savedBooks.books &&
-          savedBooks.books.map(book => (
+          savedBooks.books.reverse().map(book => (
             <div key={book.id} className="favorite-book">
-              {book.title}
+              <img src={book.cover} alt={book.title} width="60px" />
             </div>
           ))}
       </div>
-    </div>
+    </animated.div>
   );
 };
 
