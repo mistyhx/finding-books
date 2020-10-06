@@ -19,6 +19,21 @@
   position: sticky;
   background: #fff;
   z-index: 999;
+
+  &-right {
+    display: flex;
+    .icon-bookshelf {
+      height: 40px;
+
+      .icon-button {
+        cursor: pointer;
+        margin: 0.5rem 1rem;
+        &:hover {
+          opacity: 0.3;
+        }
+      }
+    }
+  }
 }
 
 .search-icon {

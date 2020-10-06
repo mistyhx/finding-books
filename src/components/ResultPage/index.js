@@ -75,22 +75,24 @@ const ResultPage = ({ location }) => {
       <Bookshelf open={open} />
       <div className="results-page">
         <div className="controls">
-          <button onClick={() => setOpen(!open)}>
-            <Grid size={18} />
-          </button>
           <Filters fetchData={parameters => fetchBooks(parameters)} />
-          <form
-            className="search-form"
-            onSubmit={e => {
-              e.preventDefault();
-              if (input) {
-                fetchBooks();
-              }
-            }}
-          >
-            <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
-            <input type="submit" value="Search" />
-          </form>
+          <div className="controls-right">
+            <form
+              className="search-form"
+              onSubmit={e => {
+                e.preventDefault();
+                if (input) {
+                  fetchBooks();
+                }
+              }}
+            >
+              <input type="text" placeholder="search" value={input} onChange={e => setInput(e.target.value)} />
+              <input type="submit" value="Search" />
+            </form>
+            <div className="icon-bookshelf">
+              <Grid className="icon-button" size={24} fill={open ? "black" : "none"} onClick={() => setOpen(!open)} />
+            </div>
+          </div>
         </div>
         {state.loading ? (
           <Loader />

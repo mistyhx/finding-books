@@ -5,9 +5,13 @@
   background: $background-gray;
   height: 12rem;
   padding: 1rem;
+  overflow: scroll;
 
   .favorite-books-list {
     display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    //transition: all 500ms ease;
     .favorite-book {
       padding: 0 1rem;
 
