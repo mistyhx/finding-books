@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { SearchContextProvider } from "./context/SearchContext";
+import { BookShelfProvider } from "./context/BooksehlfContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <SearchContextProvider>
-      <App />
+      <BookShelfProvider>
+        <App />
+      </BookShelfProvider>
     </SearchContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

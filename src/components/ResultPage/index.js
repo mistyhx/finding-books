@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
+import { Grid } from "react-feather";
 import Book from "../Book";
 import Pagination from "../Pagination";
 import Loader from "../Loader";
@@ -69,6 +70,7 @@ const ResultPage = ({ location }) => {
   return (
     <div className="results-page">
       <div className="controls">
+        <Grid size={18} />
         <Filters fetchData={parameters => fetchBooks(parameters)} />
         <form
           className="search-form"
