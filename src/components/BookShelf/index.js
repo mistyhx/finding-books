@@ -1,10 +1,12 @@
 import React from "react";
-import "index.scss";
+import "./index.scss";
 
-const Booksehlf = () =>{
+const Bookshelf = ({}) => {
+  return (
+    <div className="bookshelf">
+      <h3>Book Shelf</h3>
+    </div>
+  );
+};
 
-  return(<div className="bookshelf"></div>)
-
-}
-
-export default Booksehlf;
+export default Bookshelf;

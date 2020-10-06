@@ -8,10 +8,13 @@ import Loader from "../Loader";
 import Filters from "../Filters";
 import "./index.scss";
 import { SearchContext } from "../../context/SearchContext";
+import Bookshelf from "../BookShelf";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
   const [current, setCurrent] = useState(1);
+  const [open, setOpen] = useState(false);
+
   const { parameters } = useContext(SearchContext);
   const initialState = {
     loading: true,
@@ -69,8 +72,11 @@ const ResultPage = ({ location }) => {
 
   return (
     <div className="results-page">
+      {open ? <Bookshelf /> : null}
       <div className="controls">
-        <Grid size={18} />
+        <button>
+          <Grid onClick={() => setOpen(!open)} size={18} />
+        </button>
         <Filters fetchData={parameters => fetchBooks(parameters)} />
         <form
           className="search-form"
