@@ -27,9 +27,14 @@
   display: flex;
   justify-content: space-between;
 
+  &-text {
+    margin-right: 0.5rem;
+  }
+
   .icon-button {
     cursor: pointer;
     opacity: 0.7;
+    width: 24px;
     &:hover {
       opacity: 0.2;
     }

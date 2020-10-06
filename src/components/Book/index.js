@@ -32,13 +32,15 @@ const Book = ({ data }) => {
       </div>
       <div className="book-info">
         <div className="title">
-          {title && title}
-          <Heart
-            className="icon-button"
-            size={24}
-            onClick={() => handleFavorite()}
-            fill={favorite ? "black" : "none"}
-          />
+          <div className="title-text">{title && title}</div>
+          <div>
+            <Heart
+              className="icon-button"
+              size={24}
+              onClick={() => handleFavorite()}
+              fill={favorite ? "black" : "none"}
+            />
+          </div>
         </div>
 
         <div>
