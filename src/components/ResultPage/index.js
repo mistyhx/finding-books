@@ -107,7 +107,7 @@ const ResultPage = ({ location }) => {
               >
                 {item => props => (
                   <div style={props}>
-                    <Book data={item.volumeInfo} />
+                    <Book data={item} />
                   </div>
                 )}
               </Transition>

@@ -7,7 +7,14 @@ const reducer = (state, action) => {
     case "ADD_BOOK":
       return {
         ...state,
-        books: [...state.books, action.payload],
+        books: [
+          ...state.books,
+          {
+            id: action.payload.id,
+            title: action.payload.volumeInfo.title,
+            cover: action.payload.volumeInfo.imageLinks.smallThumbnail,
+          },
+        ],
       };
 
     case "REMOVE_BOOK":
@@ -30,8 +37,8 @@ export const BookShelfProvider = ({ children }) => {
     dispatch({ type: "ADD_BOOK", payload: item });
   };
 
-  const removeBook = item => {
-    dispatch({ type: "REMOVE_BOOK", payload: item });
+  const removeBook = id => {
+    dispatch({ type: "REMOVE_BOOK", payload: id });
   };
 
   const [savedBooks, dispatch] = useReducer(reducer, initialState);
