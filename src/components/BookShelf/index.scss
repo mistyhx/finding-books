@@ -1,0 +1,26 @@
+@import "../../styling/colors";
+@import "../../styling/layers";
+
+.bookshelf {
+  background: $background-gray;
+  height: 12rem;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-y: scroll;
+
+  .favorite-books-list {
+    display: flex;
+    //justify-content: flex-end;
+    //flex-direction: row-reverse;
+    .favorite-book {
+      padding: 0 1rem;
+
+      img {
+        box-shadow: $elevation2;
+      }
+    }
+  }
+}
