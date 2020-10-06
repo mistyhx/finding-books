@@ -24,7 +24,14 @@ const Book = ({ data }) => {
       <div className="book-cover">
         <a href={previewLink && previewLink} target="_blank" rel="noopener noreferrer">
           {imageLinks ? (
-            <img src={imageLinks.smallThumbnail} alt={title && title} />
+            <img
+              src={
+                imageLinks.smallThumbnail
+                  ? imageLinks.smallThumbnail
+                  : "https://i.dlpng.com/static/png/6565478_preview.png"
+              }
+              alt={title && title}
+            />
           ) : (
             <img src="https://i.dlpng.com/static/png/6565478_preview.png" alt="no-cover" />
           )}

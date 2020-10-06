@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { useSpring, useTransition, animated } from "react-spring";
 import { BookshelfContext } from "../../context/BooksehlfContext";
 import "./index.scss";
@@ -25,13 +26,25 @@ const Bookshelf = ({ open }) => {
           ({ item, key, props }) =>
             item && (
               <animated.div key={key} style={props} className="favorite-book">
-                <img src={item.cover} alt={item.title} width="60px" />
+                <img
+                  src={item.cover ? item.cover : "https://i.dlpng.com/static/png/6565478_preview.png"}
+                  alt={item.title}
+                  width="60px"
+                />
               </animated.div>
             )
         )}
       </div>
     </animated.div>
   );
+};
+
+Bookshelf.propTypes = {
+  open: PropTypes.bool.isRequired,
+};
+
+Bookshelf.defaultProps = {
+  open: false,
 };
 
 export default Bookshelf;

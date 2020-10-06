@@ -12,7 +12,7 @@ const reducer = (state, action) => {
           {
             id: action.payload.id,
             title: action.payload.volumeInfo.title,
-            cover: action.payload.volumeInfo.imageLinks.smallThumbnail,
+            cover: action.payload.volumeInfo.imageLinks && action.payload.volumeInfo.imageLinks.smallThumbnail,
           },
         ],
       };
