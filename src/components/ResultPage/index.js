@@ -72,7 +72,6 @@ const ResultPage = ({ location }) => {
 
   return (
     <div>
-      <Bookshelf open={open} />
       <div className="results-page">
         <div className="controls">
           <Filters fetchData={parameters => fetchBooks(parameters)} />
@@ -127,6 +126,7 @@ const ResultPage = ({ location }) => {
           </div>
         )}
       </div>
+      <Bookshelf open={open} />
     </div>
   );
 };
