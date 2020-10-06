@@ -1,26 +1,34 @@
 import React, { useContext, useRef } from "react";
 import { useSpring, useTransition, animated } from "react-spring";
-import "./index.scss";
 import { BookshelfContext } from "../../context/BooksehlfContext";
+import "./index.scss";
 
 const Bookshelf = ({ open }) => {
   const { savedBooks } = useContext(BookshelfContext);
 
   const props = useSpring({
     opacity: open ? 1 : 0,
-    height: open ? "12rem" : "0rem",
+    height: open ? "14rem" : "0rem",
+  });
+
+  const transitions = useTransition(savedBooks.books, item => item.id, {
+    from: { opacity: 0, transform: `translateY(20px)` },
+    enter: { opacity: 1, transform: `translateY(0px)` },
+    leave: { opacity: 0, transform: `translateY(20px)` },
   });
 
   return (
     <animated.div className="bookshelf" style={props}>
       <h3>Favorites</h3>
       <div className="favorite-books-list">
-        {savedBooks.books &&
-          savedBooks.books.reverse().map(book => (
-            <div key={book.id} className="favorite-book">
-              <img src={book.cover} alt={book.title} width="60px" />
-            </div>
-          ))}
+        {transitions.map(
+          ({ item, key, props }) =>
+            item && (
+              <animated.div key={key} style={props} className="favorite-book">
+                <img src={item.cover} alt={item.title} width="60px" />
+              </animated.div>
+            )
+        )}
       </div>
     </animated.div>
   );

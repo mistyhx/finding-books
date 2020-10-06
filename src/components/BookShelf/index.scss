@@ -1,4 +1,5 @@
 @import "../../styling/colors";
+@import "../../styling/layers";
 
 .bookshelf {
   background: $background-gray;
@@ -9,6 +10,10 @@
     display: flex;
     .favorite-book {
       padding: 0 1rem;
+
+      img {
+        box-shadow: $elevation2;
+      }
     }
   }
 }

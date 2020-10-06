@@ -22,7 +22,7 @@ const Book = ({ data }) => {
   return (
     <div className="book">
       <div className="book-cover">
-        <a href={previewLink && data.previewLink} target="_blank" rel="noopener noreferrer">
+        <a href={previewLink && previewLink} target="_blank" rel="noopener noreferrer">
           {imageLinks ? (
             <img src={imageLinks.smallThumbnail} alt={title && title} />
           ) : (
