@@ -17,6 +17,17 @@
     //flex-direction: row-reverse;
     .favorite-book {
       padding: 0 1rem;
+      transition: all 100ms ease-in-out;
+      cursor: grab;
+
+      &:hover {
+        transform: translateY(-6px) !important;
+      }
+
+      &-dragging {
+        cursor: grabbing;
+        visibility: hidden;
+      }
 
       img {
         box-shadow: $elevation2;
