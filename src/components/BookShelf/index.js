@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useSpring, useTransition, animated } from "react-spring";
-import { BookshelfContext } from "../../context/BooksehlfContext";
 import { X } from "react-feather";
+import { BookshelfContext } from "../../context/BooksehlfContext";
+import useMousePosition from "../../hooks/useMousePosition";
 import "./index.scss";
 
 const Bookshelf = ({ open, onClose }) => {
   const { savedBooks, removeBook } = useContext(BookshelfContext);
   const [dragging, setDragging] = useState("");
+
+  const { y } = useMousePosition();
 
   const props = useSpring({
     opacity: open ? 1 : 0,
@@ -24,8 +27,11 @@ const Bookshelf = ({ open, onClose }) => {
     setDragging(id);
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = id => {
     setDragging("");
+    if (window.innerHeight - y > 224) {
+      removeBook(id);
+    }
   };
 
   return (
@@ -44,14 +50,16 @@ const Bookshelf = ({ open, onClose }) => {
                 className={`favorite-book ${dragging === item.id && "favorite-book-dragging"}`}
                 draggable="true"
                 onDragOver={() => handleDragging(item.id)}
-                onDragEnd={() => handleDragEnd()}
+                onDragEnd={() => handleDragEnd(item.id)}
               >
-                <img
-                  src={item.cover ? item.cover : "https://i.dlpng.com/static/png/6565478_preview.png"}
-                  alt={item.title}
-                  width="60px"
-                  draggable="false"
-                />
+                <a href={item.url && item.url} target="_blank" rel="noopener noreferrer" draggable="false">
+                  <img
+                    src={item.cover ? item.cover : "https://i.dlpng.com/static/png/6565478_preview.png"}
+                    alt={item.title}
+                    width="60px"
+                    draggable="false"
+                  />
+                </a>
               </animated.div>
             )
         )}
