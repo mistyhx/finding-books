@@ -16,6 +16,8 @@
     transform: rotateY(0);
     transition: all 500ms ease-in-out;
     box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
+    min-width: 130px;
+    max-height: 200px;
 
     @include bp(medium) {
       width: 130px;
