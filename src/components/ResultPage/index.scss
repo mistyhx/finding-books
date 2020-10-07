@@ -1,3 +1,5 @@
+@import "../../styling/responsive";
+
 .results-page {
   padding: 4rem;
   max-width: 1200px;
@@ -19,9 +21,26 @@
   position: sticky;
   background: #fff;
   z-index: 999;
+  input[type="submit"] {
+    height: 40px;
+  }
+
+  @include bp(medium) {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
 
   &-right {
     display: flex;
+
+    @include bp(medium) {
+      margin-top: 1rem;
+    }
+
+    .search-form {
+      height: 40px;
+      min-width: 360px;
+    }
     .icon-bookshelf {
       height: 40px;
 
@@ -33,73 +52,5 @@
         }
       }
     }
-  }
-}
-
-.search-icon {
-  position: absolute;
-  right: 20px;
-  top: 8px;
-}
-
-.results-page .search-form {
-  height: 40px;
-  min-width: 360px;
-}
-
-.author-name {
-  padding-right: 0.5rem;
-}
-
-.author-name:not(:nth-last-child(2)):after {
-  content: " |";
-}
-
-.controls input[type="submit"] {
-  height: 40px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .pagination {
-    font-size: 1.5rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-    padding: 1rem 0;
-  }
-
-  .results-page .search-form {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .controls {
-    margin-bottom: 3rem;
-  }
-  .results-page {
-    padding: 2rem;
-  }
-}
-
-@media only screen and (max-width: 425px) {
-  .results-page {
-    padding: 2rem 1rem;
-  }
-  .book {
-    margin: 4rem 0;
-  }
-
-  .book-cover {
-    height: 100%;
-  }
-  .book-cover img {
-    width: 80px;
-  }
-  .meta {
-    margin-top: 1rem;
   }
 }

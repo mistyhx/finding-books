@@ -11,6 +11,22 @@
   left: 0;
   overflow-y: scroll;
 
+  &-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .icon-button {
+      cursor: pointer;
+
+      &:hover {
+        transform: rotate(90deg);
+        opacity: 0.6;
+        transition: transform 200ms ease-in-out;
+      }
+    }
+  }
+
   .favorite-books-list {
     display: flex;
     //justify-content: flex-end;

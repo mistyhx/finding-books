@@ -1,0 +1,16 @@
+@mixin bp($point) {
+  @if $point == large {
+    @media only screen and (max-width: 1024px) {
+      @content;
+    }
+  }
+  @if $point == medium {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  } @else if $point == small {
+    @media only screen and (max-width: 425px) {
+      @content;
+    }
+  }
+}

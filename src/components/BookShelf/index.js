@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useSpring, useTransition, animated } from "react-spring";
 import { BookshelfContext } from "../../context/BooksehlfContext";
+import { X } from "react-feather";
 import "./index.scss";
 
-const Bookshelf = ({ open }) => {
+const Bookshelf = ({ open, onClose }) => {
   const { savedBooks, removeBook } = useContext(BookshelfContext);
   const [dragging, setDragging] = useState("");
 
@@ -29,7 +30,10 @@ const Bookshelf = ({ open }) => {
 
   return (
     <animated.div className="bookshelf" style={props}>
-      <h3>Favorites</h3>
+      <div className="bookshelf-title">
+        <h3>Favorites</h3>
+        <X className="icon-button" size={18} onClick={() => onClose()} />
+      </div>
       <div className="favorite-books-list">
         {transitions.map(
           ({ item, key, props }) =>
