@@ -15,9 +15,12 @@
     transform-style: preserve-3d;
     transform: rotateY(0);
     transition: all 500ms ease-in-out;
+    box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
+    min-width: 130px;
+    max-height: 200px;
 
     @include bp(medium) {
-      width: 130px;
+      idth: 130px;
     }
 
     @include bp(small) {
@@ -26,13 +29,11 @@
     }
 
     img {
-      box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
-      transition: all 500ms ease-in-out;
       cursor: pointer;
       object-fit: cover;
 
       @include bp(small) {
-        width: 92px;
+        min-width: 92px;
       }
     }
 
@@ -56,12 +57,10 @@
 
     &:hover {
       transform: rotateY(-20deg);
+      box-shadow: 20px 18px 10px 0 rgba(0, 0, 0, 0.15);
       &:after {
         right: -15px;
         width: 15px;
-      }
-      img {
-        box-shadow: 20px 18px 10px 0 rgba(0, 0, 0, 0.15);
       }
     }
   }

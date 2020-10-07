@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import backgroundImage from "../../bg.png";
-import "./index.css";
+import "./index.scss";
 
 const SearchPage = () => {
   const [term, setTerm] = useState("");
   return (
     <div
-      className="search-page"
+      className="search"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: "no-repeat",

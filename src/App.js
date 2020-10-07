@@ -1,9 +1,9 @@
 import React from "react";
-import "./App.css";
 import { Book } from "react-feather";
 import SearchPage from "./components/SearchPage";
 import { Router, Link } from "@reach/router";
 import ResultPage from "./components/ResultPage";
+import "./App.scss";
 
 function App() {
   return (

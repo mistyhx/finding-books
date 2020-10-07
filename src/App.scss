@@ -1,3 +1,5 @@
+@import "./styling/responsive.scss";
+
 html,
 body {
   margin: 0;
@@ -18,12 +20,17 @@ a:visited {
 }
 .App {
   margin: 0;
+  padding: 0;
   height: 100vh;
   position: relative;
+
+  .main {
+    height: 100%;
+  }
 }
 
 .logo {
-  z-index: 99;
+  z-index: 999;
   position: absolute;
   left: 1rem;
   top: 1rem;
@@ -45,6 +52,3 @@ h3 {
 h1 {
   font-size: 3rem;
 }
-
-
-
