@@ -23,14 +23,14 @@
     position: -webkit-sticky;
     position: sticky;
     background: #fff;
-    z-index: 999;
+    z-index: 99;
     input[type="submit"] {
       height: 40px;
     }
 
     @include bp(medium) {
       flex-direction: column;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     &-right {

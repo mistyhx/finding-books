@@ -20,7 +20,7 @@
     max-height: 200px;
 
     @include bp(medium) {
-      width: 130px;
+      idth: 130px;
     }
 
     @include bp(small) {
@@ -33,7 +33,7 @@
       object-fit: cover;
 
       @include bp(small) {
-        width: 92px;
+        min-width: 92px;
       }
     }
 
