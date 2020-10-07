@@ -5,6 +5,10 @@
   margin: 4rem 0;
   max-width: 960px;
 
+  @include bp(small) {
+    flex-direction: column;
+  }
+
   &-cover {
     transition: all 500ms ease-in-out;
     transform-origin: 0 0;
@@ -12,13 +16,23 @@
     transform: rotateY(0);
     transition: all 500ms ease-in-out;
 
+    @include bp(medium) {
+      width: 130px;
+    }
+
+    @include bp(small) {
+      padding-left: 0.5rem;
+      width: 100px;
+    }
+
     img {
       box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
-      width: 128px;
       transition: all 500ms ease-in-out;
       cursor: pointer;
-      @include bp(medium) {
-        width: 100px;
+      object-fit: cover;
+
+      @include bp(small) {
+        width: 92px;
       }
     }
 
@@ -59,6 +73,10 @@
     justify-content: space-between;
     width: 100%;
 
+    @include bp(small) {
+      padding: 1rem 1rem 1rem 0.5rem;
+    }
+
     .title {
       font-family: "Didot", cursive;
       border-left: 6px solid #ff4f2d;
@@ -91,11 +109,19 @@
       height: 46px;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      @include bp(small) {
+        font-size: 0.8rem;
+      }
     }
 
     .meta {
       margin-top: 2rem;
       opacity: 0.4;
+
+      @include bp(small) {
+        margin-top: 1rem;
+      }
       .author-name {
         padding-right: 0.5rem;
       }
