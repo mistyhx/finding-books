@@ -126,7 +126,7 @@ const ResultPage = ({ location }) => {
           </div>
         )}
       </div>
-      <Bookshelf open={open} />
+      <Bookshelf open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };

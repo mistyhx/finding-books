@@ -1,125 +1,133 @@
-.book-cover img {
-  box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 128px;
-  transition: all 500ms ease-in-out;
-  cursor: pointer;
-}
-
-.book-cover:hover {
-  transform: rotateY(-20deg);
-}
-
-.book-cover:hover:after {
-  right: -15px;
-  width: 15px;
-}
-
-.book-cover:hover img {
-  box-shadow: 20px 18px 10px 0 rgba(0, 0, 0, 0.15);
-}
-
-.title {
-  font-family: "Didot", cursive;
-  border-left: 6px solid #ff4f2d;
-  font-weight: bold;
-  font-size: 1.5rem;
-  padding: 0 1rem;
-  display: flex;
-  justify-content: space-between;
-
-  &-text {
-    margin-right: 0.5rem;
-  }
-
-  .icon-button {
-    cursor: pointer;
-    opacity: 0.7;
-    width: 24px;
-    &:hover {
-      opacity: 0.2;
-    }
-  }
-}
-
-.book-info {
-  padding: 0 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.description {
-  opacity: 0.7;
-  line-height: 1.5rem;
-  height: 46px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.meta {
-  margin-top: 2rem;
-  opacity: 0.4;
-}
+@import "../../styling/responsive";
 
 .book {
   display: flex;
   margin: 4rem 0;
   max-width: 960px;
-}
-.book-cover {
-  transition: all 500ms ease-in-out;
-  transform-origin: 0 0;
-  transform-style: preserve-3d;
-  transform: rotateY(0);
-  transition: all 500ms ease-in-out;
-}
-.book-cover:after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  display: block;
-  top: 0px;
-  right: -6px;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAG0lEQVQIW2P8/////w8fPjAICAgwwGhGGggCAOYAMfLhHG5wAAAAAElFTkSuQmCC)
-    repeat;
-  width: 4px;
-  height: calc(100% - 3px);
-  transform: rotateY(35deg);
-  transform-origin: right;
-  /*webkit transform fix the z-index issue for safari*/
-  -webkit-transform: translate3d(0, 0, 0);
-  transition: all 500ms ease-in-out;
-}
 
-@media only screen and (max-width: 600px) {
-  .title {
-    font-size: 1rem;
+  @include bp(small) {
+    flex-direction: column;
   }
+
+  &-cover {
+    transition: all 500ms ease-in-out;
+    transform-origin: 0 0;
+    transform-style: preserve-3d;
+    transform: rotateY(0);
+    transition: all 500ms ease-in-out;
+
+    @include bp(medium) {
+      width: 130px;
+    }
+
+    @include bp(small) {
+      padding-left: 0.5rem;
+      width: 100px;
+    }
+
+    img {
+      box-shadow: 17px 12px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: all 500ms ease-in-out;
+      cursor: pointer;
+      object-fit: cover;
+
+      @include bp(small) {
+        width: 92px;
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      display: block;
+      top: 0px;
+      right: -6px;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAG0lEQVQIW2P8/////w8fPjAICAgwwGhGGggCAOYAMfLhHG5wAAAAAElFTkSuQmCC)
+        repeat;
+      width: 4px;
+      height: calc(100% - 3px);
+      transform: rotateY(35deg);
+      transform-origin: right;
+      /*webkit transform fix the z-index issue for safari*/
+      -webkit-transform: translate3d(0, 0, 0);
+      transition: all 500ms ease-in-out;
+    }
+
+    &:hover {
+      transform: rotateY(-20deg);
+      &:after {
+        right: -15px;
+        width: 15px;
+      }
+      img {
+        box-shadow: 20px 18px 10px 0 rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
   .book-info {
-    padding: 0 2rem;
-  }
-  .pagination {
-    right: -1rem;
-  }
-  .book-cover img {
-    width: 100px;
-  }
-}
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
 
-@media only screen and (max-width: 425px) {
-  .book {
-    margin: 4rem 0;
-  }
+    @include bp(small) {
+      padding: 1rem 1rem 1rem 0.5rem;
+    }
 
-  .book-cover {
-    height: 100%;
-  }
-  .book-cover img {
-    width: 80px;
-  }
+    .title {
+      font-family: "Didot", cursive;
+      border-left: 6px solid #ff4f2d;
+      font-weight: bold;
+      font-size: 1.5rem;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
 
-  .meta {
-    margin-top: 1rem;
+      @include bp(medium) {
+        font-size: 1rem;
+      }
+
+      &-text {
+        margin-right: 0.5rem;
+      }
+
+      .icon-button {
+        cursor: pointer;
+        opacity: 0.7;
+        width: 24px;
+        &:hover {
+          opacity: 0.2;
+        }
+      }
+    }
+    .description {
+      opacity: 0.7;
+      line-height: 1.5rem;
+      height: 46px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @include bp(small) {
+        font-size: 0.8rem;
+      }
+    }
+
+    .meta {
+      margin-top: 2rem;
+      opacity: 0.4;
+
+      @include bp(small) {
+        margin-top: 1rem;
+      }
+      .author-name {
+        padding-right: 0.5rem;
+      }
+      .author-name:not(:nth-last-child(2)):after {
+        content: " |";
+      }
+    }
   }
 }

@@ -1,11 +1,21 @@
+@import "../../styling/responsive";
+
 .pagination {
   text-align: center;
   position: fixed;
-  right: 0;
   font-family: "Didot", cursive;
   font-size: 2rem;
-  top: 30%;
-  right: 1.2rem;
+  top: 35%;
+  right: 1rem;
+
+  @include bp(medium) {
+    font-size: 1.5rem;
+  }
+
+  @include bp(small) {
+    font-size: 1.2rem;
+    right: 0rem;
+  }
 
   .inactive-previous {
     pointer-events: none;
@@ -16,6 +26,10 @@
     color: #bababa;
     padding: 0.5rem 2rem;
     cursor: pointer;
+
+    @include bp(small) {
+      padding: 0.5rem;
+    }
 
     svg {
       color: #191919;
@@ -28,11 +42,5 @@
 
   .active-page {
     color: black;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .pagination {
-    font-size: 1.5rem;
   }
 }

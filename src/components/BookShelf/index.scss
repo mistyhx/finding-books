@@ -11,12 +11,39 @@
   left: 0;
   overflow-y: scroll;
 
+  &-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .icon-button {
+      cursor: pointer;
+
+      &:hover {
+        transform: rotate(90deg);
+        opacity: 0.6;
+        transition: transform 200ms ease-in-out;
+      }
+    }
+  }
+
   .favorite-books-list {
     display: flex;
     //justify-content: flex-end;
     //flex-direction: row-reverse;
     .favorite-book {
       padding: 0 1rem;
+      transition: all 100ms ease-in-out;
+      cursor: grab;
+
+      &:hover {
+        transform: translateY(-6px) !important;
+      }
+
+      &-dragging {
+        cursor: grabbing;
+        visibility: hidden;
+      }
 
       img {
         box-shadow: $elevation2;
