@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import { Transition } from "react-spring/renderprops";
-import { Grid } from "react-feather";
+import { Folder } from "react-feather";
 import Book from "../Book";
 import Pagination from "../Pagination";
 import Loader from "../Loader";
@@ -9,6 +9,7 @@ import Filters from "../Filters";
 import "./index.scss";
 import { SearchContext } from "../../context/SearchContext";
 import Bookshelf from "../BookShelf";
+import { BookshelfContext } from "../../context/BooksehlfContext";
 
 const ResultPage = ({ location }) => {
   const [input, setInput] = useState(location.state ? location.state.searchTerm : "");
@@ -16,6 +17,8 @@ const ResultPage = ({ location }) => {
   const [open, setOpen] = useState(false);
 
   const { parameters } = useContext(SearchContext);
+  const { savedBooks } = useContext(BookshelfContext);
+
   const initialState = {
     loading: true,
     error: null,
@@ -93,7 +96,8 @@ const ResultPage = ({ location }) => {
               <input type="submit" value="Search" />
             </form>
             <div className="icon-bookshelf">
-              <Grid className="icon-button" size={24} fill={open ? "black" : "none"} onClick={() => setOpen(!open)} />
+              <div className="icon-bookshelf-badge">{savedBooks.books.length ? savedBooks.books.length : null}</div>
+              <Folder className="icon-button" size={24} fill={open ? "black" : "none"} onClick={() => setOpen(!open)} />
             </div>
           </div>
         </div>

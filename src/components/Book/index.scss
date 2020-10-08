@@ -20,7 +20,7 @@
     max-height: 200px;
 
     @include bp(medium) {
-      idth: 130px;
+      width: 130px;
     }
 
     @include bp(small) {
@@ -73,6 +73,7 @@
     width: 100%;
 
     @include bp(small) {
+      margin-top: 1rem;
       padding: 1rem 1rem 1rem 0.5rem;
     }
 
