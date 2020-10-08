@@ -88,6 +88,7 @@ const ResultPage = ({ location }) => {
               onSubmit={e => {
                 e.preventDefault();
                 if (input) {
+                  setCurrent(1);
                   fetchBooks();
                 }
               }}
@@ -96,7 +97,7 @@ const ResultPage = ({ location }) => {
               <input type="submit" value="Search" />
             </form>
             <div className="icon-bookshelf">
-              <div className="icon-bookshelf-badge">{savedBooks.books.length ? savedBooks.books.length : null}</div>
+              {savedBooks.books.length ? <div className="icon-bookshelf-badge">{savedBooks.books.length}</div> : null}
               <Folder className="icon-button" size={24} fill={open ? "black" : "none"} onClick={() => setOpen(!open)} />
             </div>
           </div>

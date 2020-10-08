@@ -5,15 +5,14 @@ import { BookshelfContext } from "../../context/BooksehlfContext";
 import "./index.scss";
 
 const Book = ({ data }) => {
-  const [favorite, setFavorite] = useState(false);
-  const { addBook, removeBook } = useContext(BookshelfContext);
+  const { savedBooks, addBook, removeBook } = useContext(BookshelfContext);
 
   const { previewLink, imageLinks, title, description, authors, publishedDate } = data.volumeInfo;
+  const { id } = data;
 
   const handleFavorite = () => {
-    setFavorite(!favorite);
-    if (favorite) {
-      removeBook(data.id);
+    if (savedBooks.books.some(item => item.id === id)) {
+      removeBook(id);
     } else {
       addBook(data);
     }
@@ -45,7 +44,7 @@ const Book = ({ data }) => {
               className="icon-button"
               size={24}
               onClick={() => handleFavorite()}
-              fill={favorite ? "black" : "none"}
+              fill={savedBooks.books.some(item => item.id === id) ? "black" : "none"}
             />
           </div>
         </div>
