@@ -31,7 +31,6 @@
     border-radius: 0;
     transition: box-shadow 200ms ease-in-out;
     position: relative;
-
     &:focus-within {
       box-shadow: 0 8px 25px 5px rgba(222, 143, 143, 0.25);
     }
