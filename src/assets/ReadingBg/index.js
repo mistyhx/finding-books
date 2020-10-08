@@ -71,8 +71,8 @@ const ReadingBg = () => {
       <circle id="circle1" fill="#ff4f2d" cx="135.5" cy="347.5" r="5.5" />
       <circle id="circle4" fill="#ff4f2d" opacity="0.2" cx="248.5" cy="544.5" r="5.5" />
       <circle id="circle5" fill="#ff4f2d" cx="314.5" cy="90.5" r="8.5" />
-      <circle id="circle2-2" fill="#ff4f2d" opacity="0.2" cx="129.5" cy="107.5" r="5.5" />
-      <circle id="circle5-2" fill="#ff4f2d" cx="135.5" cy="128.5" r="5.5" />
+      <circle id="circle6" fill="#ff4f2d" opacity="0.2" cx="129.5" cy="107.5" r="5.5" />
+      <circle id="circle7" fill="#ff4f2d" cx="135.5" cy="128.5" r="5.5" />
     </svg>
   );
 };
