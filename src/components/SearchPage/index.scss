@@ -48,6 +48,12 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+
+    @include bp(small) {
+      svg {
+        width: 1400px;
+      }
+    }
   }
 }
 
